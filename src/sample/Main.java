@@ -11,9 +11,7 @@ import javafx.util.Pair;
 import sample.ListCellFXML.ListCellController;
 import sample.SettingsFXML.SettingsController;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.MalformedURLException;
 
 public class Main extends Application {
     public static Pair<Node, RootController> squibMain = getMAIN();
@@ -22,7 +20,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         Parent root = (Parent) squibMain.getKey();
-        primaryStage.setTitle("Hello World");
+        primaryStage.setTitle("EmailPos80");
         primaryStage.setScene(new Scene(root, 1280, 768));
         primaryStage.show();
     }
@@ -42,11 +40,6 @@ public class Main extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        try {
-            System.err.println("Couldn't find root! " + Resource.load("root.fxml").toUri().toURL());
-        } catch (MalformedURLException | FileNotFoundException e) {
-            e.printStackTrace();
-        }
         System.exit(-2);
         return null;
     }
@@ -60,6 +53,7 @@ public class Main extends Application {
             e.printStackTrace();
         }
         System.err.println("Couldn't find List Cell!");
+        System.exit(-2);
         return null;
     }
 
@@ -71,6 +65,7 @@ public class Main extends Application {
             e.printStackTrace();
         }
         System.err.println("Couldn't find Settings!");
+        System.exit(-2);
         return null;
     }
 }

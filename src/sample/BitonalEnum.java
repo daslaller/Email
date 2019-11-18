@@ -6,9 +6,11 @@ import escpos.image.BitonalThreshold;
 import escpos.image.EscPosImage;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
+import javafx.scene.image.PixelFormat;
 
 import java.awt.image.BufferedImage;
 
+@SuppressWarnings("SpellCheckingInspection")
 public enum BitonalEnum {
     BITONAL(new BitonalThreshold()),
     BITONAL_DARKEN(new BitonalThreshold(50)),
@@ -42,6 +44,8 @@ public enum BitonalEnum {
 
     public EscPosImage image(Image image) {
         BufferedImage bufferedImage = SwingFXUtils.fromFXImage(image, new BufferedImage((int) image.getWidth(), (int) image.getHeight(), BufferedImage.TYPE_INT_ARGB));
+        PixelFormat.Type type = image.getPixelReader().getPixelFormat().getType();
+        System.out.println("Type: " + type + " ordinal" + type.ordinal() + " complete, " + BufferedImage.TYPE_INT_ARGB + "(ARGB)");
         return image(bufferedImage);
     }
 
