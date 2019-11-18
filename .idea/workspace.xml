@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="" />
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -66,6 +69,10 @@
       <setting name="OPEN_NEW_TAB" value="false" />
     </FindUsagesManager>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="MERGE" />
+  </component>
   <component name="MavenImportPreferences">
     <option name="importingSettings">
       <MavenImportingSettings>
@@ -75,6 +82,7 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectId" id="1Rjf4wmQrDS9h1Nm53nkntHaOcC" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectReloadState">
     <option name="STATE" value="0" />
   </component>
@@ -99,12 +107,12 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="dynamic.classpath" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/sample/SettingsFXML" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Global Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.27914894" />
     <property name="recentsLimit" value="5" />
-    <property name="settings.editor.selected.configurable" value="project.propGUI" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.CommitDialog" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -212,6 +220,17 @@
   <component name="TimeTrackingManager">
     <option name="totallyTimeSpent" value="1302000" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="true" />
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
@@ -225,10 +244,14 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="1170" y="796" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1573411607186" />
-    <state x="1105" y="685" key="FileChooserDialogImpl" timestamp="1573425782661">
+    <state x="1105" y="685" key="FileChooserDialogImpl" timestamp="1574045877106">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="1105" y="685" key="FileChooserDialogImpl/0.0.2560.1400@0.0.2560.1400" timestamp="1573425782661" />
+    <state x="1105" y="685" key="FileChooserDialogImpl/0.0.2560.1400@0.0.2560.1400" timestamp="1574045877106" />
+    <state x="1725" y="875" width="262" height="211" key="Github.ShareDialog" timestamp="1574044734117">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="1725" y="875" width="262" height="211" key="Github.ShareDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1574044734117" />
     <state width="2517" height="246" key="GridCell.Tab.0.bottom" timestamp="1573515519157">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
@@ -245,18 +268,30 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="2517" height="246" key="GridCell.Tab.0.right/0.0.2560.1400@0.0.2560.1400" timestamp="1573515519157" />
-    <state x="827" y="586" key="SettingsEditor" timestamp="1573421531979">
+    <state x="827" y="586" key="SettingsEditor" timestamp="1574045991958">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="827" y="586" key="SettingsEditor/0.0.2560.1400@0.0.2560.1400" timestamp="1573421531979" />
-    <state x="997" y="768" key="com.intellij.ide.util.TipDialog" timestamp="1573759709434">
+    <state x="827" y="586" key="SettingsEditor/0.0.2560.1400@0.0.2560.1400" timestamp="1574045991958" />
+    <state x="904" y="276" key="Vcs.Push.Dialog.v2" timestamp="1574046259804">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="997" y="768" key="com.intellij.ide.util.TipDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1573759709434" />
+    <state x="904" y="276" key="Vcs.Push.Dialog.v2/0.0.2560.1400@0.0.2560.1400" timestamp="1574046259804" />
+    <state x="711" y="143" width="1200" height="800" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1574045072101">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="711" y="143" width="1200" height="800" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1574045072101" />
+    <state x="997" y="768" key="com.intellij.ide.util.TipDialog" timestamp="1574046213616">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="997" y="768" key="com.intellij.ide.util.TipDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1574046213616" />
     <state x="1059" y="867" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1573414768935">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="1059" y="867" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.2560.1400@0.0.2560.1400" timestamp="1573414768935" />
+    <state x="1118" y="454" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1574046228708">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="1118" y="454" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.2560.1400@0.0.2560.1400" timestamp="1574046228708" />
     <state x="1216" y="649" key="refactoring.ChangeSignatureDialog" timestamp="1573426512463">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
