@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SettingsFXML.SettingsController">
+   <left>
+      <GridPane fx:id="settingsGrid_GridPane" hgap="50.0" minHeight="430.0" minWidth="325.0" vgap="50.0" BorderPane.alignment="CENTER">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="37.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="41.0" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <JFXTextField focusColor="#1f93ff" labelFloat="true" promptText="Epost">
+               <unFocusColor>
+                  <LinearGradient endX="1.0" endY="1.0" startX="0.3942307692307692" startY="0.4230769230769231">
+                     <stops>
+                        <Stop color="#ac19bfa3" />
+                        <Stop color="#ffffff00" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </unFocusColor>
+            </JFXTextField>
+            <JFXTextField focusColor="DODGERBLUE" labelFloat="true" promptText="Lösenord" GridPane.rowIndex="1">
+               <unFocusColor>
+                  <LinearGradient endX="1.0" endY="1.0" startX="0.3942307692307692" startY="0.4230769230769231">
+                     <stops>
+                        <Stop color="#ac19bfa4" />
+                        <Stop color="#ffffff00" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </unFocusColor>
+            </JFXTextField>
+            <JFXTextField focusColor="DODGERBLUE" labelFloat="true" promptText="Värdadress" GridPane.rowIndex="2">
+               <unFocusColor>
+                  <LinearGradient endX="1.0" endY="1.0" startX="0.3942307692307692" startY="0.4230769230769231">
+                     <stops>
+                        <Stop color="#ac19bfa4" />
+                        <Stop color="#ffffff00" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </unFocusColor>
+            </JFXTextField>
+            <JFXTextField focusColor="DODGERBLUE" labelFloat="true" promptText="Port" GridPane.rowIndex="3">
+               <unFocusColor>
+                  <LinearGradient endX="1.0" endY="1.0" startX="0.3942307692307692" startY="0.4230769230769231">
+                     <stops>
+                        <Stop color="#ac19bfa3" />
+                        <Stop color="#ffffff00" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </unFocusColor>
+            </JFXTextField>
+            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="4">
+               <children>
+                  <JFXComboBox fx:id="printerCombBox_JFXComboBox" focusColor="DODGERBLUE" labelFloat="true" onAction="#printerCombBox_JFXComboBoxActionPerformed" prefHeight="25.0" prefWidth="200.0" promptText="Skrivare">
+                     <unFocusColor>
+                        <LinearGradient endX="1.0" endY="1.0" startX="0.3942307692307692" startY="0.4230769230769231">
+                           <stops>
+                              <Stop color="#ac19bfa4" />
+                              <Stop color="#80008000" offset="1.0" />
+                           </stops>
+                        </LinearGradient>
+                     </unFocusColor>
+                  </JFXComboBox>
+                  <JFXComboBox prefHeight="25.0" prefWidth="158.0" promptText="Utskrivnings sätt" />
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+         </padding>
+      </GridPane>
+   </left>
+   <center>
+      <Canvas BorderPane.alignment="CENTER" />
+   </center>
+   <right>
+      <StackPane fx:id="rightSettingsPane_StackPane" style="-fx-border-color: lightgrey;">
+         <children>
+            <ListView fx:id="printerDocumentNodeList_JFXListView" StackPane.alignment="CENTER" />
+            <VBox fx:id="documentButtonGroup_Vbox" maxHeight="-Infinity" maxWidth="-Infinity" StackPane.alignment="TOP_LEFT">
+               <children>
+                  <JFXButton fx:id="addImageButton_JFXButton" onAction="#addImageButton_JFXButtonActionPerformed" style="-fx-background-color: lightgreen;" text="+ Bild" textFill="WHITE">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="addEmailButton_JFXButton" onAction="#addEmailButton_JFXButtonActionPerformed" style="-fx-background-color: lightgreen;" text="+ Epost" textFill="WHITE">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="addTextButton_JFXButton" onAction="#addTextButton_JFXButtonActionPerformed" style="-fx-background-color: lightgreen;" text="+ Text" textFill="WHITE">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </JFXButton>
+               </children>
+            </VBox>
+            <JFXButton fx:id="previewButton_JFXButton" onAction="#previewButton_JFXButtonActionPerformed" style="-fx-background-color: purple;" text="Preview" textFill="WHITE" StackPane.alignment="BOTTOM_CENTER">
+               <StackPane.margin>
+                  <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+               </StackPane.margin>
+            </JFXButton>
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </StackPane>
+   </right>
+   <bottom>
+      <StackPane prefHeight="25.0" style="-fx-background-color: lightgrey;" BorderPane.alignment="CENTER">
+         <children>
+            <JFXButton fx:id="saveButton_JFXButton" defaultButton="true" onAction="#saveButton_JFXButtonActionPerformed" ripplerFill="WHITE" style="-fx-background-color: purple;" text="Save" textFill="WHITE" StackPane.alignment="BOTTOM_RIGHT">
+               <StackPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </StackPane.margin>
+            </JFXButton>
+         </children>
+      </StackPane>
+   </bottom>
+</BorderPane>
