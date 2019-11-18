@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Resource">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../../Crossplatform library/lib/Resource" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/../../Crossplatform library/lib/Resource" recursive="false" />
+  </library>
+</component>

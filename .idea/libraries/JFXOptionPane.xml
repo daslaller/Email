@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="JFXOptionPane">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../../Crossplatform library/lib/JFXOptionPane" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/../../Crossplatform library/lib/JFXOptionPane" recursive="false" />
+  </library>
+</component>

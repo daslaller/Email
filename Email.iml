@@ -7,12 +7,12 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="com.jfoenix:jfoenix:9.0.9" level="application" />
-    <orderEntry type="library" name="JFXOptionPane" level="application" />
-    <orderEntry type="library" name="Escpos-coffee" level="application" />
-    <orderEntry type="library" name="Resource" level="application" />
-    <orderEntry type="library" name="CycleBackground" level="application" />
-    <orderEntry type="library" name="UtilitiesTest" level="application" />
-    <orderEntry type="library" name="SystemInformation" level="application" />
+    <orderEntry type="library" name="Utilities" level="project" />
+    <orderEntry type="library" name="SystemInformation" level="project" />
+    <orderEntry type="library" name="JFXOptionPane" level="project" />
+    <orderEntry type="library" name="Resource" level="project" />
+    <orderEntry type="library" name="Escpos-coffee" level="project" />
+    <orderEntry type="library" name="CycleBackground" level="project" />
+    <orderEntry type="library" name="com.jfoenix:jfoenix:9.0.9" level="project" />
   </component>
 </module>

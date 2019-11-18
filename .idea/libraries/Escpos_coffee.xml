@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Escpos-coffee">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../../Crossplatform library/lib/Escpos-coffee" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/../../Crossplatform library/lib/Escpos-coffee" recursive="false" />
+  </library>
+</component>

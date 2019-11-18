@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Utilities">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../../Crossplatform library/lib/UtilitiesTest" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/../../Crossplatform library/lib/UtilitiesTest" recursive="false" />
+  </library>
+</component>

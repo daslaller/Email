@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="CycleBackground">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../../Crossplatform library/lib/CycleBackground" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/../../Crossplatform library/lib/CycleBackground" recursive="false" />
+  </library>
+</component>
