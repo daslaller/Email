@@ -5,6 +5,7 @@ import com.company.JFXOptionPane;
 import com.company.RandomImage;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -95,7 +96,8 @@ public class SettingsController {
 
         if (buttonType.equals(ButtonType.APPLY) || buttonType.equals(ButtonType.OK)) {
             double imgWidth = (int) rollWidthPixels;
-            double imgHeight = (imgWidth / read.getWidth()) * read.getHeight();
+//            double imgHeight = (imgWidth / read.getWidth()) * read.getHeight();
+            double imgHeight = read.getHeight();
             read = RandomImage.resize(read, (int) imgWidth, (int) imgHeight);
         }
         controller.setImage(new PrintObjects.PosImg(bild_typ.image(read)));
@@ -153,11 +155,10 @@ public class SettingsController {
         assert addTextButton_JFXButton != null : "fx:id=\"addTextButton_JFXButton\" was not injected: check your FXML file 'Settings.fxml'.";
         assert previewButton_JFXButton != null : "fx:id=\"previewButton_JFXButton\" was not injected: check your FXML file 'Settings.fxml'.";
         assert saveButton_JFXButton != null : "fx:id=\"saveButton_JFXButton\" was not injected: check your FXML file 'Settings.fxml'.";
-//        rightSettingsPane_StackPane.prefWidthProperty().bind(printerDocumentNodeList_JFXListView.prefWidthProperty());
-        //        printerCombBox_JFXComboBox.setItems(availablePrintersList);
 
+        Platform.setImplicitExit(false);
         printerCombBox_JFXComboBox.setItems(availablePrintersList);
-        printerCombBox_JFXComboBox.getSelectionModel().select(showPrinterDialog());
+        printerCombBox_JFXComboBox.getSelectionModel().select(printerDialog());
         printerDocumentNodeList_JFXListView.setItems(printerOutputOptions);
 
     }
@@ -166,7 +167,7 @@ public class SettingsController {
         return Arrays.asList(PrintServiceLookup.lookupPrintServices(DocFlavor.INPUT_STREAM.AUTOSENSE, null));
     }
 
-    public PrintService showPrinterDialog() {
+    public PrintService printerDialog() {
         if (!availablePrintersList.isEmpty()) {
             return JFXOptionPane.showChoiceDialog(availablePrintersList.toArray(new PrintService[0]), "Skrivare", "Skrivare", "Använd någon av följande skrivare för utskrift");
         } else {
@@ -174,6 +175,7 @@ public class SettingsController {
             System.exit(-1);
             return null;
         }
-
     }
+
+
 }

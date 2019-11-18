@@ -18,13 +18,14 @@ import sample.SettingsFXML.SettingsController;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URL;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class RootController {
 
     ObservableList<Node> printerOutputOptions = FXCollections.observableArrayList();
-    Pair<Node, SettingsController> settings = Main.squibSettings;
+    Pair<Node, SettingsController> settings;
     @FXML
     private ResourceBundle resources;
 
@@ -109,17 +110,18 @@ public class RootController {
 //        assert previewButton_JFXButton != null : "fx:id=\"previewButton_JFXButton\" was not injected: check your FXML file 'root.fxml'.";
 //        assert saveButton_JFXButton != null : "fx:id=\"saveButton_JFXButton\" was not injected: check your FXML file 'root.fxml'.";
 //
-        setSettingsTab(settings.getKey());
+
+        /*        setSettingsTab(Main.getSETTINGS().getKey());*/
     }
 
-    public void setSettingsTab(Node node) {
-        settingsTab_Tab.setContent(node);
+    public void setSettingsTab(Pair<Node, SettingsController> pair) {
+        settingsTab_Tab.setContent(pair.getKey());
+        settings = pair;
     }
 
-    public void setEpostTab(Node content) {
-        epostTab_Tab.setContent(content);
+    public void setEpostTab(Pair<Node, Object> pair) {
+        epostTab_Tab.setContent(pair.getKey());
     }
-
 
 
     public enum PRINTEROPTIONS {
@@ -159,7 +161,7 @@ public class RootController {
             }
         };
 
-        private Optional<Object> savedT;
+        private Object savedT;
         private static EscPos escPos;
 
         static {
@@ -171,7 +173,7 @@ public class RootController {
         }
 
         public boolean isSaved() {
-            return savedT != null && savedT.isPresent();
+            return savedT != null;
         }
 
         public <T> void save(T type) {
@@ -179,7 +181,7 @@ public class RootController {
         }
 
         public <T> void commit(T newCommit) {
-            this.savedT = Optional.of(newCommit);
+            this.savedT = Objects.requireNonNull(newCommit, "Cant commit null!");
         }
 
         public Object load() {
