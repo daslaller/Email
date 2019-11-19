@@ -37,11 +37,11 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class SettingsController {
-    public ObservableList<Node> printerOutputOptions = FXCollections.observableArrayList();
-    ObservableList<PrintService> availablePrintersList = FXCollections.observableArrayList(Objects.requireNonNull(getAvailablePrinters(), "Cant find any printers"));
+    private ObservableList<Node> printerOutputOptions = FXCollections.observableArrayList();
+    private ObservableList<PrintService> availablePrintersList = FXCollections.observableArrayList(Objects.requireNonNull(getAvailablePrinters(), "Cant find any printers"));
 
-    public static double rollWidthInches = 3.14961; //Inches, 80mm = 3.14961 inc
-    public static double rollWidthPixels = rollWidthInches * DisplayInfo.getMonitorBitDepth();
+    private static double rollWidthInches = 3.14961; //Inches, 80mm = 3.14961 inc
+    private static double rollWidthPixels = rollWidthInches * DisplayInfo.getMonitorBitDepth();
 
     JFXListCell<Node> testCell = new JFXListCell<>();
     @FXML
@@ -93,15 +93,18 @@ public class SettingsController {
 
         BitonalEnum bild_typ = JFXOptionPane.showChoiceDialog(BitonalEnum.values(), "Bild typ", "Välj en bild typ!", "Bild typen, skrivaren ska använda vid utskrift.");
         ButtonBar.ButtonData buttonType = JFXOptionPane.showThreeOptionAlert("Vill du att programmet väljer en automatisk storlek?", "Storlek", "Förändra storlek av bild", "Automatisk", "Ingen ändring", "Egen");
-        System.out.println("Valde: " + buttonType);
-        if (!JFXOptionPane.defaultFile.equals(file)) {
+
+        if (file.isFile()) {
+            System.out.println("YES " + (buttonType == ButtonBar.ButtonData.YES));
             switch (buttonType) {
                 case YES:
+                    System.out.println("Valde Yes");
                     double imgWidth = (int) rollWidthPixels;
                     double imgHeight = (imgWidth / read.getWidth()) * read.getHeight();
                     read = RandomImage.resize(read, (int) imgWidth, (int) imgHeight);
                     break;
                 case CANCEL_CLOSE:
+                    System.out.println("Valde cancel close");
                     int width;
                     int height;
                     String string_width = JFXOptionPane.showInputDialog("Bildens bredd", "Bildens storlek", "Skriv in din bredd du vill ha på bilden, om du skriver " + '"' + "r" + '"' + "Anpassas bredden till skrivarens pappers storlek");
@@ -119,9 +122,12 @@ public class SettingsController {
                     read = RandomImage.resize(read, (width <= 0 ? read.getWidth() : width), (height <= 0 ? read.getHeight() : height));
                     break;
                 default:
+                    System.out.println("Valde annan");
                     break;
             }
             printerOutputOptions.add(createCell("(IMAGE)", file.getName(), new PrintObjects.PosImg(bild_typ.image(read))));
+        } else {
+            System.err.println("File not available: " + file);
         }
     }
 
@@ -171,7 +177,7 @@ public class SettingsController {
 
     }
 
-    public Node createCell(String title, String description, PrintObjects.PosImg image) {
+    private Node createCell(String title, String description, PrintObjects.PosImg image) {
         Pair<Node, ListCellController> nodeListCellControllerPair = Objects.requireNonNull(Main.getLISTCELL());
         Region load = (Region) nodeListCellControllerPair.getKey();
         ListCellController controller = nodeListCellControllerPair.getValue();
@@ -192,11 +198,11 @@ public class SettingsController {
         return load;
     }
 
-    public List<PrintService> getAvailablePrinters() {
+    private List<PrintService> getAvailablePrinters() {
         return Arrays.asList(PrintServiceLookup.lookupPrintServices(DocFlavor.INPUT_STREAM.AUTOSENSE, null));
     }
 
-    public PrintService printerDialog() {
+    private PrintService printerDialog() {
         if (!availablePrintersList.isEmpty()) {
             return JFXOptionPane.showChoiceDialog(availablePrintersList.toArray(new PrintService[0]), "Skrivare", "Skrivare", "Använd någon av följande skrivare för utskrift");
         } else {
