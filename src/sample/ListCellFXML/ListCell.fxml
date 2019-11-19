@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
@@ -16,7 +17,8 @@
       <Label fx:id="descriptionLabel_Label" StackPane.alignment="CENTER">
          <StackPane.margin>
             <Insets bottom="100.0" left="100.0" right="100.0" top="100.0" />
-         </StackPane.margin></Label>
+         </StackPane.margin>
+      </Label>
       <JFXButton fx:id="deleteButton_JFXButton" onAction="#deleteButton_JFXButtonActionPerformed" style="-fx-background-color: red;" text="X" textFill="WHITE" StackPane.alignment="TOP_RIGHT" />
    </children>
 </StackPane>

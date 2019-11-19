@@ -86,6 +86,7 @@
    <right>
       <StackPane fx:id="rightSettingsPane_StackPane" style="-fx-border-color: lightgrey;">
          <children>
+            <JFXNodesList fx:id="printerDocumentNodeList_JFXNodeList" spacing="15.0" StackPane.alignment="TOP_CENTER" />
             <VBox fx:id="documentButtonGroup_Vbox" maxHeight="-Infinity" maxWidth="-Infinity" StackPane.alignment="TOP_LEFT">
                <children>
                   <JFXButton fx:id="addImageButton_JFXButton" onAction="#addImageButton_JFXButtonActionPerformed" style="-fx-background-color: lightgreen;" text="+ Bild" textFill="WHITE">
@@ -110,7 +111,6 @@
                   <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
                </StackPane.margin>
             </JFXButton>
-            <JFXNodesList fx:id="printerDocumentNodeList_JFXListView" StackPane.alignment="TOP_CENTER" />
          </children>
          <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

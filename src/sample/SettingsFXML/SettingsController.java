@@ -5,6 +5,7 @@ import com.company.JFXOptionPane;
 import com.company.RandomImage;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXListCell;
 import com.jfoenix.controls.JFXNodesList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -41,6 +42,8 @@ public class SettingsController {
 
     public static double rollWidthInches = 3.14961; //Inches, 80mm = 3.14961 inc
     public static double rollWidthPixels = rollWidthInches * DisplayInfo.getMonitorBitDepth();
+
+    JFXListCell<Node> testCell = new JFXListCell<>();
     @FXML
     private ResourceBundle resources;
 
@@ -57,7 +60,7 @@ public class SettingsController {
     private StackPane rightSettingsPane_StackPane;
 
     @FXML
-    private JFXNodesList/*<Node>*/ printerDocumentNodeList_JFXListView;
+    private JFXNodesList/*<Node>*/ printerDocumentNodeList_JFXNodeList;
 
     @FXML
     private VBox documentButtonGroup_Vbox;
@@ -142,7 +145,7 @@ public class SettingsController {
                 System.out.println("Exit pressed for node " + controller.toString());
                 return printerOutputOptions.remove(nodeListCellControllerPair.getKey());
             });
-            printerDocumentNodeList_JFXListView.prefWidthProperty().bind(load.widthProperty());
+//            printerDocumentNodeList_JFXListView.prefWidthProperty().bind(load.widthProperty());
             printerOutputOptions.add(load);
             System.out.println("Node added!");
         }
@@ -153,19 +156,19 @@ public class SettingsController {
         assert settingsGrid_GridPane != null : "fx:id=\"settingsGrid_GridPane\" was not injected: check your FXML file 'Settings.fxml'.";
         assert printerCombBox_JFXComboBox != null : "fx:id=\"printerCombBox_JFXComboBox\" was not injected: check your FXML file 'Settings.fxml'.";
         assert rightSettingsPane_StackPane != null : "fx:id=\"rightSettingsPane_StackPane\" was not injected: check your FXML file 'Settings.fxml'.";
-        assert printerDocumentNodeList_JFXListView != null : "fx:id=\"printerDocumentNodeList_JFXListView\" was not injected: check your FXML file 'Settings.fxml'.";
+        assert printerDocumentNodeList_JFXNodeList != null : "fx:id=\"printerDocumentNodeList_JFXListView\" was not injected: check your FXML file 'Settings.fxml'.";
         assert documentButtonGroup_Vbox != null : "fx:id=\"documentButtonGroup_Vbox\" was not injected: check your FXML file 'Settings.fxml'.";
         assert addImageButton_JFXButton != null : "fx:id=\"addImageButton_JFXButton\" was not injected: check your FXML file 'Settings.fxml'.";
         assert addEmailButton_JFXButton != null : "fx:id=\"addEmailButton_JFXButton\" was not injected: check your FXML file 'Settings.fxml'.";
         assert addTextButton_JFXButton != null : "fx:id=\"addTextButton_JFXButton\" was not injected: check your FXML file 'Settings.fxml'.";
         assert previewButton_JFXButton != null : "fx:id=\"previewButton_JFXButton\" was not injected: check your FXML file 'Settings.fxml'.";
         assert saveButton_JFXButton != null : "fx:id=\"saveButton_JFXButton\" was not injected: check your FXML file 'Settings.fxml'.";
-
+        printerOutputOptions = printerDocumentNodeList_JFXNodeList.getChildren();
         printerCombBox_JFXComboBox.setItems(availablePrintersList);
         printerCombBox_JFXComboBox.getSelectionModel().select(printerDialog());
-//        printerDocumentNodeList_JFXListView.setItems(printerOutputOptions);
-        printerOutputOptions = printerDocumentNodeList_JFXListView.getChildren();
-        rightSettingsPane_StackPane.prefWidthProperty().bind(printerDocumentNodeList_JFXListView.widthProperty());
+
+
+//        rightSettingsPane_StackPane.prefWidthProperty().bind(printerDocumentNodeList_JFXNodeList.widthProperty());
 
     }
 

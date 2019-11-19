@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXListCell?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.StackPane?>
 
-<JFXListCell fx:id="main_Node" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ListCellFXML.ListCellController">
-   <graphic>
-      <StackPane fx:id="rootStackPane_StackPane">
-         <children>
-            <ImageView fx:id="nodeImage_ImageView" pickOnBounds="true" preserveRatio="true" />
-            <Label fx:id="nodeIdentifierLabel_Label" StackPane.alignment="TOP_CENTER">
-               <StackPane.margin>
-                  <Insets top="5.0" />
-               </StackPane.margin>
-            </Label>
-            <Label fx:id="descriptionLabel_Label" />
-            <JFXButton fx:id="deleteButton_JFXButton" onAction="#deleteButton_JFXButtonActionPerformed" style="-fx-background-color: red;" text="X" textFill="WHITE" StackPane.alignment="TOP_RIGHT" />
-         </children>
-      </StackPane>
-   </graphic>
-</JFXListCell>
+
+<StackPane fx:id="rootStackPane_StackPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ListCellFXML.ListCellController">
+   <children>
+      <ImageView fx:id="nodeImage_ImageView" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="nodeIdentifierLabel_Label" StackPane.alignment="TOP_CENTER">
+         <StackPane.margin>
+            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+         </StackPane.margin>
+      </Label>
+      <Label fx:id="descriptionLabel_Label" StackPane.alignment="CENTER">
+         <StackPane.margin>
+            <Insets bottom="100.0" left="100.0" right="100.0" top="100.0" />
+         </StackPane.margin>
+      </Label>
+      <JFXButton fx:id="deleteButton_JFXButton" onAction="#deleteButton_JFXButtonActionPerformed" style="-fx-background-color: red;" text="X" textFill="WHITE" StackPane.alignment="TOP_RIGHT" />
+   </children>
+</StackPane>

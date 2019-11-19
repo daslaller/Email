@@ -2,6 +2,7 @@ package sample.ListCellFXML;
 
 import com.company.CycleBackground;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXListCell;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.StringProperty;
@@ -35,8 +36,8 @@ public class ListCellController {
     public RootController.PRINTEROPTIONS printImage = RootController.PRINTEROPTIONS.IMAGE;
 
 //
-//    @FXML
-//    private JFXListCell main_Node;
+    @FXML
+    private JFXListCell root_JFXListCell;
 
     @FXML
     private ImageView nodeImage_ImageView;
@@ -69,6 +70,7 @@ public class ListCellController {
         nodeImage_ImageView.fitHeightProperty().bind(rootStackPane_StackPane.prefHeightProperty());
 //        CycleBackground.cycle(rootStackPane_StackPane, Duration.millis(15000), CycleBackground.CYCLE_MODE.COLOR);
         rootStackPane_StackPane.setBackground(CycleBackground.createColorBackground(CycleBackground.randomColor(1f, 1f, 1f, 1f, 2)));
+
     }
 
     public Node root() {
