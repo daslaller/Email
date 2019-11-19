@@ -145,7 +145,7 @@ public class SettingsController {
                 System.out.println("Exit pressed for node " + controller.toString());
                 return printerOutputOptions.remove(nodeListCellControllerPair.getKey());
             });
-//            printerDocumentNodeList_JFXListView.prefWidthProperty().bind(load.widthProperty());
+
             printerOutputOptions.add(load);
             System.out.println("Node added!");
         }
