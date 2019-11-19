@@ -1,6 +1,5 @@
 package sample;
 
-import com.company.JFXOptionPane;
 import com.jfoenix.controls.JFXListView;
 import escpos.EscPos;
 import javafx.collections.FXCollections;
@@ -16,7 +15,6 @@ import javafx.util.Pair;
 import output.PrinterOutputStream;
 import sample.SettingsFXML.SettingsController;
 
-import javax.print.PrintService;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URL;
@@ -119,7 +117,7 @@ public class RootController {
     public void setSettingsTab(Pair<Node, SettingsController> pair) {
         settingsTab_Tab.setContent(pair.getKey());
         settings = pair;
-        JFXOptionPane.showChoiceDialog(pair.getValue().getAvailablePrinters().toArray(new PrintService[0]), "Skrivare", "Skrivare", "Använd någon av följande skrivare för utskrift");
+//        JFXOptionPane.showChoiceDialog(pair.getValue().getAvailablePrinters().toArray(new PrintService[0]), "Skrivare", "Skrivare", "Använd någon av följande skrivare för utskrift");
     }
 
     public void setEpostTab(Pair<Node, Object> pair) {

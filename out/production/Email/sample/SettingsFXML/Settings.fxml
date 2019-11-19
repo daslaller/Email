@@ -2,10 +2,10 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXNodesList?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.canvas.Canvas?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -23,11 +23,11 @@
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
          </columnConstraints>
          <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="37.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="41.0" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="41.0" vgrow="SOMETIMES" />
+            <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
             <JFXTextField focusColor="#1f93ff" labelFloat="true" promptText="Epost">
@@ -97,7 +97,6 @@
    <right>
       <StackPane fx:id="rightSettingsPane_StackPane" style="-fx-border-color: lightgrey;">
          <children>
-            <ListView fx:id="printerDocumentNodeList_JFXListView" StackPane.alignment="CENTER" />
             <VBox fx:id="documentButtonGroup_Vbox" maxHeight="-Infinity" maxWidth="-Infinity" StackPane.alignment="TOP_LEFT">
                <children>
                   <JFXButton fx:id="addImageButton_JFXButton" onAction="#addImageButton_JFXButtonActionPerformed" style="-fx-background-color: lightgreen;" text="+ Bild" textFill="WHITE">
@@ -122,6 +121,7 @@
                   <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
                </StackPane.margin>
             </JFXButton>
+            <JFXNodesList fx:id="printerDocumentNodeList_JFXListView" StackPane.alignment="TOP_CENTER" />
          </children>
          <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

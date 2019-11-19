@@ -2,7 +2,6 @@ package sample.ListCellFXML;
 
 import com.company.CycleBackground;
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXListCell;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.StringProperty;
@@ -11,14 +10,14 @@ import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.StackPane;
-import javafx.util.Duration;
-import sample.RootController;
 import sample.PrintObjects;
+import sample.RootController;
 
 import java.io.IOException;
 import java.util.concurrent.Callable;
@@ -27,7 +26,7 @@ public class ListCellController {
     public Callable defaultOnDeleteAction = new Callable() {
         @Override
         public Object call() {
-            main_Node.setVisible(false);
+            root().setVisible(false);
             return null;
         }
     };
@@ -35,9 +34,9 @@ public class ListCellController {
     public RootController.PRINTEROPTIONS printText = RootController.PRINTEROPTIONS.TEXT;
     public RootController.PRINTEROPTIONS printImage = RootController.PRINTEROPTIONS.IMAGE;
 
-
-    @FXML
-    private JFXListCell main_Node;
+//
+//    @FXML
+//    private JFXListCell main_Node;
 
     @FXML
     private ImageView nodeImage_ImageView;
@@ -66,13 +65,14 @@ public class ListCellController {
         assert deleteButton_JFXButton != null : "fx:id=\"deleteButton_JFXButton\" was not injected: check your FXML file 'ListCell.fxml'.";
         assert nodeIdentifierLabel_Label != null : "fx:id=\"nodeIdentifierLabel_Label\" was not injected: check your FXML file 'ListCell.fxml'.";
         assert descriptionLabel_Label != null : "fx:id=\"descriptionLabel_Label\" was not injected: check your FXML file 'ListCell.fxml'.";
-        nodeImage_ImageView.fitWidthProperty().bind(rootStackPane_StackPane.widthProperty());
-        nodeImage_ImageView.fitHeightProperty().bind(rootStackPane_StackPane.heightProperty());
-        CycleBackground.cycle(rootStackPane_StackPane, Duration.millis(15000), CycleBackground.CYCLE_MODE.COLOR);
+        nodeImage_ImageView.fitWidthProperty().bind(rootStackPane_StackPane.prefWidthProperty());
+        nodeImage_ImageView.fitHeightProperty().bind(rootStackPane_StackPane.prefHeightProperty());
+//        CycleBackground.cycle(rootStackPane_StackPane, Duration.millis(15000), CycleBackground.CYCLE_MODE.COLOR);
+        rootStackPane_StackPane.setBackground(CycleBackground.createColorBackground(CycleBackground.randomColor(1f, 1f, 1f, 1f, 2)));
     }
 
-    public JFXListCell root() {
-        return main_Node;
+    public Node root() {
+        return rootStackPane_StackPane;
     }
 
     public void setTitle(String text) {
