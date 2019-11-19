@@ -13,7 +13,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonType;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
@@ -93,13 +92,34 @@ public class SettingsController {
         BufferedImage read = ImageIO.read(file);
 
         BitonalEnum bild_typ = JFXOptionPane.showChoiceDialog(BitonalEnum.values(), "Bild typ", "Välj en bild typ!", "Bild typen, skrivaren ska använda vid utskrift.");
-        ButtonBar.ButtonData buttonType = JFXOptionPane.showThreeOptionAlert("Vill du att programmet väljer en automatisk storlek?", "Storlek", "Förändra storlek av bild", "Automatisk", "Egen", "Default");
+        ButtonBar.ButtonData buttonType = JFXOptionPane.showThreeOptionAlert("Vill du att programmet väljer en automatisk storlek?", "Storlek", "Förändra storlek av bild", "Automatisk", "Ingen ändring", "Egen");
+        System.out.println("Valde: " + buttonType);
         if (!JFXOptionPane.defaultFile.equals(file)) {
-            if (buttonType.equals(ButtonType.APPLY) || buttonType.equals(ButtonType.OK)) {
-                double imgWidth = (int) rollWidthPixels;
-//            double imgHeight = (imgWidth / read.getWidth()) * read.getHeight();
-                double imgHeight = read.getHeight();
-                read = RandomImage.resize(read, (int) imgWidth, (int) imgHeight);
+            switch (buttonType) {
+                case YES:
+                    double imgWidth = (int) rollWidthPixels;
+                    double imgHeight = (imgWidth / read.getWidth()) * read.getHeight();
+                    read = RandomImage.resize(read, (int) imgWidth, (int) imgHeight);
+                    break;
+                case CANCEL_CLOSE:
+                    int width;
+                    int height;
+                    String string_width = JFXOptionPane.showInputDialog("Bildens bredd", "Bildens storlek", "Skriv in din bredd du vill ha på bilden, om du skriver " + '"' + "r" + '"' + "Anpassas bredden till skrivarens pappers storlek");
+                    String string_height = JFXOptionPane.showInputDialog("Bildens höjd", "Bildens storlek", "Skriv in din höjd du vill ha på bilden, om du skriver" + '"' + "r" + '"' + "Anpassas höjden till skrivarens pappers storlek");
+                    if (string_width.equals("r")) {
+                        width = (int) rollWidthPixels;
+                    } else {
+                        width = Integer.parseInt(string_width);
+                    }
+                    if (string_height.equals("r")) {
+                        height = (int) ((rollWidthPixels / read.getWidth()) * read.getHeight());
+                    } else {
+                        height = Integer.parseInt(string_height);
+                    }
+                    read = RandomImage.resize(read, (width <= 0 ? read.getWidth() : width), (height <= 0 ? read.getHeight() : height));
+                    break;
+                default:
+                    break;
             }
             printerOutputOptions.add(createCell("(IMAGE)", file.getName(), new PrintObjects.PosImg(bild_typ.image(read))));
         }
