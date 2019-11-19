@@ -28,6 +28,7 @@ public class PrintObjects {
                     ", imageWrapperInterface=" + imageWrapperInterface +
                     '}';
         }
+
     }
 
     public static class PosText {

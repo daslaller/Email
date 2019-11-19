@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.StackPane?>
-
-
+<?import javafx.scene.layout.*?>
 <StackPane fx:id="rootStackPane_StackPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ListCellFXML.ListCellController">
    <children>
       <ImageView fx:id="nodeImage_ImageView" pickOnBounds="true" preserveRatio="true" />

@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
@@ -95,7 +96,7 @@ public class SettingsController {
         BufferedImage read = ImageIO.read(file);
 
         BitonalEnum bild_typ = JFXOptionPane.showChoiceDialog(BitonalEnum.values(), "Bild typ", "Välj en bild typ!", "Bild typen, skrivaren ska använda vid utskrift.");
-        ButtonType buttonType = JFXOptionPane.showConfirmationDialog("Vill du att programmet väljer en automatisk storlek?", "Storlek", "Förändra storlek av bild");
+        ButtonBar.ButtonData buttonType = JFXOptionPane.showThreeOptionAlert("Vill du att programmet väljer en automatisk storlek?", "Storlek", "Förändra storlek av bild", "Automatisk" , "Egen", "Default");
         if (!JFXOptionPane.defaultFile.equals(file)) {
             if (buttonType.equals(ButtonType.APPLY) || buttonType.equals(ButtonType.OK)) {
                 double imgWidth = (int) rollWidthPixels;
@@ -103,14 +104,14 @@ public class SettingsController {
                 double imgHeight = read.getHeight();
                 read = RandomImage.resize(read, (int) imgWidth, (int) imgHeight);
             }
-            controller.setImage(new PrintObjects.PosImg(bild_typ.image(read)));
-            controller.setTitle(printerOutputOptions.size() + 1 + " (TEXT)");
-            controller.setExitAction(() -> {
-                System.out.println("Exit pressed for node " + controller.toString());
-                return printerOutputOptions.remove(controller.root());
-            });
+//            controller.setImage(new PrintObjects.PosImg(bild_typ.image(read)));
+//            controller.setTitle(printerOutputOptions.size() + 1 + " (TEXT)");
+//            controller.setExitAction(() -> {
+//                System.out.println("Exit pressed for node " + controller.toString());
+//                return printerOutputOptions.remove(controller.root());
+//            });
 //            printerDocumentNodeList_JFXListView.prefWidthProperty().bind(load.widthProperty());
-            printerOutputOptions.add(load);
+            printerOutputOptions.add(createCell("(IMAGE)", file.getName(), new PrintObjects.PosImg(bild_typ.image(read))));
         }
     }
 
@@ -139,14 +140,16 @@ public class SettingsController {
         String description = JFXOptionPane.showInputDialog("Skriv in din text som du vill ska hamna på kvittot", "Text", "Text tillägg för utskrift");
 
         if (!description.isEmpty() && !description.isBlank()) {
-            controller.setDescription(new PrintObjects.PosText(description));
+
+
+/*            controller.setDescription(new PrintObjects.PosText(description));
             controller.setTitle(printerOutputOptions.size() + 1 + " (TEXT)");
             controller.setExitAction(() -> {
                 System.out.println("Exit pressed for node " + controller.toString());
                 return printerOutputOptions.remove(nodeListCellControllerPair.getKey());
-            });
+            });*/
 
-            printerOutputOptions.add(load);
+            printerOutputOptions.add(createCell("(TEXT)", description, null));
             System.out.println("Node added!");
         }
     }
@@ -170,6 +173,27 @@ public class SettingsController {
 
 //        rightSettingsPane_StackPane.prefWidthProperty().bind(printerDocumentNodeList_JFXNodeList.widthProperty());
 
+    }
+
+    public Node createCell(String title, String description, PrintObjects.PosImg image) {
+        Pair<Node, ListCellController> nodeListCellControllerPair = Objects.requireNonNull(Main.getLISTCELL());
+        Region load = (Region) nodeListCellControllerPair.getKey();
+        ListCellController controller = nodeListCellControllerPair.getValue();
+
+        if (title != null) {
+            controller.setTitle((printerOutputOptions.size() + 1) + ' ' + title);
+        }
+        if (description != null) {
+            controller.setDescription(new PrintObjects.PosText(description));
+        }
+        if (image != null) {
+            controller.setImage(image);
+        }
+        controller.setExitAction(() -> {
+            System.out.println("Exit pressed for node " + controller.toString());
+            return printerOutputOptions.remove(nodeListCellControllerPair.getKey());
+        });
+        return load;
     }
 
     public List<PrintService> getAvailablePrinters() {
