@@ -88,15 +88,12 @@ public class SettingsController {
 
     @FXML
     void addImageButton_JFXButtonActionPerformed(ActionEvent event) throws IOException {
-        Pair<Node, ListCellController> nodeListCellControllerPair = Objects.requireNonNull(Main.getLISTCELL());
-        Region load = (Region) nodeListCellControllerPair.getKey();
-        ListCellController controller = nodeListCellControllerPair.getValue();
 
         File file = JFXOptionPane.showSpecificFileChooser(JFXOptionPane.Filters.ALL, JFXOptionPane.SaveOption.OPEN_OPTION, ((Node) event.getTarget()).getScene().getWindow());
         BufferedImage read = ImageIO.read(file);
 
         BitonalEnum bild_typ = JFXOptionPane.showChoiceDialog(BitonalEnum.values(), "Bild typ", "Välj en bild typ!", "Bild typen, skrivaren ska använda vid utskrift.");
-        ButtonBar.ButtonData buttonType = JFXOptionPane.showThreeOptionAlert("Vill du att programmet väljer en automatisk storlek?", "Storlek", "Förändra storlek av bild", "Automatisk" , "Egen", "Default");
+        ButtonBar.ButtonData buttonType = JFXOptionPane.showThreeOptionAlert("Vill du att programmet väljer en automatisk storlek?", "Storlek", "Förändra storlek av bild", "Automatisk", "Egen", "Default");
         if (!JFXOptionPane.defaultFile.equals(file)) {
             if (buttonType.equals(ButtonType.APPLY) || buttonType.equals(ButtonType.OK)) {
                 double imgWidth = (int) rollWidthPixels;
@@ -104,13 +101,6 @@ public class SettingsController {
                 double imgHeight = read.getHeight();
                 read = RandomImage.resize(read, (int) imgWidth, (int) imgHeight);
             }
-//            controller.setImage(new PrintObjects.PosImg(bild_typ.image(read)));
-//            controller.setTitle(printerOutputOptions.size() + 1 + " (TEXT)");
-//            controller.setExitAction(() -> {
-//                System.out.println("Exit pressed for node " + controller.toString());
-//                return printerOutputOptions.remove(controller.root());
-//            });
-//            printerDocumentNodeList_JFXListView.prefWidthProperty().bind(load.widthProperty());
             printerOutputOptions.add(createCell("(IMAGE)", file.getName(), new PrintObjects.PosImg(bild_typ.image(read))));
         }
     }
@@ -133,22 +123,8 @@ public class SettingsController {
 
     @FXML
     void addTextButton_JFXButtonActionPerformed(ActionEvent event) {
-        Pair<Node, ListCellController> nodeListCellControllerPair = Objects.requireNonNull(Main.getLISTCELL());
-        Region load = (Region) nodeListCellControllerPair.getKey();
-        ListCellController controller = nodeListCellControllerPair.getValue();
-
         String description = JFXOptionPane.showInputDialog("Skriv in din text som du vill ska hamna på kvittot", "Text", "Text tillägg för utskrift");
-
         if (!description.isEmpty() && !description.isBlank()) {
-
-
-/*            controller.setDescription(new PrintObjects.PosText(description));
-            controller.setTitle(printerOutputOptions.size() + 1 + " (TEXT)");
-            controller.setExitAction(() -> {
-                System.out.println("Exit pressed for node " + controller.toString());
-                return printerOutputOptions.remove(nodeListCellControllerPair.getKey());
-            });*/
-
             printerOutputOptions.add(createCell("(TEXT)", description, null));
             System.out.println("Node added!");
         }
