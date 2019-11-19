@@ -5,7 +5,6 @@ import com.company.JFXOptionPane;
 import com.company.RandomImage;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -156,9 +155,8 @@ public class SettingsController {
         assert previewButton_JFXButton != null : "fx:id=\"previewButton_JFXButton\" was not injected: check your FXML file 'Settings.fxml'.";
         assert saveButton_JFXButton != null : "fx:id=\"saveButton_JFXButton\" was not injected: check your FXML file 'Settings.fxml'.";
 
-        Platform.setImplicitExit(false);
         printerCombBox_JFXComboBox.setItems(availablePrintersList);
-        printerCombBox_JFXComboBox.getSelectionModel().select(printerDialog());
+//        printerCombBox_JFXComboBox.getSelectionModel().select(printerDialog());
         printerDocumentNodeList_JFXListView.setItems(printerOutputOptions);
 
     }

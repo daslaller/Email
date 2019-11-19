@@ -2,7 +2,6 @@ package sample;
 
 import com.company.Resource;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -15,6 +14,7 @@ import sample.SettingsFXML.SettingsController;
 import java.io.IOException;
 import java.util.Objects;
 
+@SuppressWarnings("WeakerAccess")
 public class Main extends Application {
     public static Pair<Node, RootController> squibMain = getMAIN();
 
@@ -24,7 +24,7 @@ public class Main extends Application {
         primaryStage.setTitle("EmailPos80");
         primaryStage.setScene(new Scene(root, 1024, 768));
         primaryStage.show();
-        primaryStage.setOnCloseRequest(windowEvent -> Platform.setImplicitExit(true));
+//        primaryStage.setOnCloseRequest(windowEvent -> Platform.setImplicitExit(true));
 
     }
 
