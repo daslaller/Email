@@ -5,9 +5,13 @@ import escpos.image.EscPosImage;
 import escpos.image.ImageWrapperInterface;
 import escpos.image.RasterBitImageWrapper;
 
-import java.util.Objects;
-
 public class PrintObjects {
+
+   public static Style CURRENT_DEFAULT_STYLE = new Style();
+   static {
+       CURRENT_DEFAULT_STYLE.setBold(true);
+       CURRENT_DEFAULT_STYLE.setFontSize(Style.FontSize._6, Style.FontSize._7);
+   }
     public static class PosImg {
         public EscPosImage escPosImage;
         public ImageWrapperInterface imageWrapperInterface;
@@ -18,7 +22,7 @@ public class PrintObjects {
 
         public PosImg(EscPosImage escPosImage, ImageWrapperInterface imageWrapperInterface) {
             this.escPosImage = escPosImage;
-            this.imageWrapperInterface = Objects.requireNonNullElse(imageWrapperInterface, new RasterBitImageWrapper());
+            this.imageWrapperInterface = (imageWrapperInterface == null ? new RasterBitImageWrapper() : imageWrapperInterface);
         }
 
         @Override
@@ -32,23 +36,18 @@ public class PrintObjects {
     }
 
     public static class PosText {
-        public String text;
+        public String text = "";
         public Style escPosStyle;
 
-        public PosText(String text) {
-            this(text, null);
+        public PosText(String text, Style newStyle) {
+            this.text = text;
+            this.escPosStyle = newStyle;
+        }
+        public PosText(String text){
+            this(text, CURRENT_DEFAULT_STYLE);
         }
 
-        public PosText(String text, Style escPosStyle) {
-            this.text = Objects.requireNonNullElse(text, "");
-            this.escPosStyle = Objects.requireNonNullElseGet(escPosStyle, () -> {
-                Style style = new Style();
-                style.setBold(false);
-                style.setFontName(Style.FontName.Font_B);
-                style.setFontSize(Style.FontSize._4, Style.FontSize._4);
-                return style;
-            });
-        }
+
 
         @Override
         public String toString() {

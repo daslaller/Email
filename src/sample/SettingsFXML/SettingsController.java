@@ -1,5 +1,7 @@
 package sample.SettingsFXML;
 
+
+
 import com.company.DisplayInfo;
 import com.company.JFXOptionPane;
 import com.company.RandomImage;
@@ -38,10 +40,10 @@ import java.util.ResourceBundle;
 
 public class SettingsController {
     private ObservableList<Node> printerOutputOptions = FXCollections.observableArrayList();
-    private ObservableList<PrintService> availablePrintersList = FXCollections.observableArrayList(Objects.requireNonNull(getAvailablePrinters(), "Cant find any printers"));
+    private final ObservableList<PrintService> availablePrintersList = FXCollections.observableArrayList(Objects.requireNonNull(getAvailablePrinters(), "Cant find any printers"));
 
-    private static double rollWidthInches = 3.14961; //Inches, 80mm = 3.14961 inc
-    private static double rollWidthPixels = rollWidthInches * DisplayInfo.getMonitorBitDepth();
+    private static final double rollWidthInches = 3.14961; //Inches, 80mm = 3.14961 inc
+    private static final double rollWidthPixels = rollWidthInches * DisplayInfo.getMonitorBitDepth();
 
     JFXListCell<Node> testCell = new JFXListCell<>();
     @FXML
@@ -150,7 +152,7 @@ public class SettingsController {
     @FXML
     void addTextButton_JFXButtonActionPerformed(ActionEvent event) {
         String description = JFXOptionPane.showInputDialog("Skriv in din text som du vill ska hamna på kvittot", "Text", "Text tillägg för utskrift");
-        if (!description.isEmpty() && !description.isBlank()) {
+        if (description != null && !description.isEmpty()) {
             printerOutputOptions.add(createCell("(TEXT)", description, null));
             System.out.println("Node added!");
         }
@@ -178,7 +180,7 @@ public class SettingsController {
     }
 
     private Node createCell(String title, String description, PrintObjects.PosImg image) {
-        Pair<Node, ListCellController> nodeListCellControllerPair = Objects.requireNonNull(Main.getLISTCELL());
+        Pair<Node, ListCellController> nodeListCellControllerPair = Objects.requireNonNull(Main.getListCellFXML());
         Region load = (Region) nodeListCellControllerPair.getKey();
         ListCellController controller = nodeListCellControllerPair.getValue();
 

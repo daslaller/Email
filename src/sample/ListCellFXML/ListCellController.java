@@ -1,6 +1,6 @@
 package sample.ListCellFXML;
 
-import com.company.CycleBackground;
+//import com.company.CycleBackground;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListCell;
 import javafx.beans.property.ObjectProperty;
@@ -69,7 +69,7 @@ public class ListCellController {
         nodeImage_ImageView.fitWidthProperty().bind(rootStackPane_StackPane.prefWidthProperty());
         nodeImage_ImageView.fitHeightProperty().bind(rootStackPane_StackPane.prefHeightProperty());
 //        CycleBackground.cycle(rootStackPane_StackPane, Duration.millis(15000), CycleBackground.CYCLE_MODE.COLOR);
-        rootStackPane_StackPane.setBackground(CycleBackground.createColorBackground(CycleBackground.randomColor(1f, 1f, 1f, 1f, 2)));
+//        rootStackPane_StackPane.setBackground(CycleBackground.createColorBackground(CycleBackground.randomColor(1f, 1f, 1f, 1f, 2)));
 
     }
 

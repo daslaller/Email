@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.web.WebView?>
+
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.epostTab.EpostController">
+   <right>
+      <WebView fx:id="emailWebView" prefHeight="-1.0" prefWidth="-1.0" BorderPane.alignment="CENTER" />
+   </right>
+   <center>
+      <ListView fx:id="emailList" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER" />
+   </center>
+   <bottom>
+      <TitledPane animated="false" text="Utils" BorderPane.alignment="CENTER">
+         <content>
+            <ToolBar>
+               <items>
+                  <JFXButton alignment="CENTER" ripplerFill="BLUE" style="-fx-background-color: white;" text="Print selected" />
+                  <Label fx:id="statusLabel" text="Label" />
+               </items>
+            </ToolBar>
+         </content>
+      </TitledPane>
+   </bottom>
+</BorderPane>

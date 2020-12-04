@@ -1,28 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXListView?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.web.WebView?>
-
 <TabPane fx:id="main_TabPane" prefHeight="500.0" prefWidth="1024.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.RootController">
   <tabs>
-    <Tab fx:id="epostTab_Tab" text="Epost">
-         <content>
-            <BorderPane fx:id="epostView_BorderPane" prefHeight="200.0" prefWidth="200.0">
-               <center>
-                  <JFXListView fx:id="epostList_JFXListView" BorderPane.alignment="CENTER" />
-               </center>
-               <right>
-                  <WebView fx:id="emailDisplay_WebView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-               </right>
-               <bottom>
-                  <HBox opacity="0.0" BorderPane.alignment="CENTER" />
-               </bottom></BorderPane>
-         </content>
-    </Tab>
+    <Tab fx:id="epostTab_Tab" text="Epost" />
     <Tab fx:id="settingsTab_Tab" text="Settings" />
   </tabs>
 </TabPane>

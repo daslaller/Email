@@ -1,13 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Major changes&#10;&#10;Fixed scaling when adding printer item&#10;Fixed image scaling when auto scaling image to printer">
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Major overhaul of old dependencys">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/JFXOptionPane1_8_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/SystemInformation1_8_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Utilities1_8_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/javax_mail.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/JFXOptionPane1.8_jar.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/Resource1_8_jar.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/SystemInformation1_8_jar.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/gson-2.8.6-javadoc.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/gson-2.8.6.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javax.mail.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/jfoenix-8.0.10-javadoc.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/jfoenix-8.0.10.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Email/sample/Connection/Connect$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Email/sample/Connection/Connect$2.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Email/sample/Connection/Connect.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Email/sample/Connection/ConnectionSettings.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Email/sample/RootController$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Email/sample/epostTab/EpostController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Email/sample/epostTab/epostCell.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/settings.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/sample/Connection/Connect.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/sample/Connection/ConnectionSettings.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/sample/Connection/MessageAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/sample/epostTab/EpostController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/sample/epostTab/epostCell.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/CycleBackground.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/CycleBackground.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Escpos_coffee.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Escpos_coffee.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/JFXOptionPane.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Resource.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Resource.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/SystemInformation.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Utilities.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/com_jfoenix_jfoenix_9_0_9.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Email.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Email.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Resource.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SystemInformation.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Utilities.jar" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Utilities1_8_jar1.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Email/sample/BitonalEnum$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email/sample/BitonalEnum$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Email/sample/BitonalEnum.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email/sample/BitonalEnum.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Email/sample/ListCellFXML/ListCellController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email/sample/ListCellFXML/ListCellController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Email/sample/ListCellFXML/ListCellController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email/sample/ListCellFXML/ListCellController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Email/sample/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email/sample/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Email/sample/PrintObjects$PosImg.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email/sample/PrintObjects$PosImg.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Email/sample/PrintObjects$PosText.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email/sample/PrintObjects$PosText.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Email/sample/PrintObjects.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email/sample/PrintObjects.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Email/sample/RootController$PRINTEROPTIONS$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email/sample/RootController$PRINTEROPTIONS$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Email/sample/RootController$PRINTEROPTIONS$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email/sample/RootController$PRINTEROPTIONS$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Email/sample/RootController$PRINTEROPTIONS.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email/sample/RootController$PRINTEROPTIONS.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Email/sample/RootController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email/sample/RootController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Email/sample/SettingsFXML/SettingsController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email/sample/SettingsFXML/SettingsController$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Email/sample/SettingsFXML/SettingsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email/sample/SettingsFXML/SettingsController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Email/sample/root.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email/sample/root.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/ListCellFXML/ListCellController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/ListCellFXML/ListCellController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/PrintObjects.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/PrintObjects.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/RootController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/RootController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sample/SettingsFXML/SettingsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/SettingsFXML/SettingsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/root.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/root.fxml" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -63,6 +117,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="FxmlFile" />
         <option value="Class" />
       </list>
     </option>
@@ -93,12 +148,11 @@
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
-    <property name="Downloaded.Files.Path" value="C:\Users\bf2di\OneDrive\Java projekt\Crossplatform library\lib\JFoenix 9.09" />
+    <property name="Downloaded.Files.Path" value="$USER_HOME$/OneDrive/Java projekt/Crossplatform library/lib" />
     <property name="Downloaded.Files.Path.Enabled" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
@@ -109,40 +163,36 @@
     <property name="OverrideImplement.combined" value="false" />
     <property name="Repository.Attach.Annotations" value="false" />
     <property name="Repository.Attach.JavaDocs" value="true" />
-    <property name="Repository.Attach.Sources" value="true" />
+    <property name="Repository.Attach.Sources" value="false" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="dynamic.classpath" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../JAR Exports/JFXOptionPane" />
-    <property name="project.structure.last.edited" value="Problems" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/sample/epostTab" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.27914894" />
     <property name="recentsLimit" value="5" />
-    <property name="settings.editor.selected.configurable" value="MTConfigurable" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="sample.ListCell" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/sample/epostTab" />
       <recent name="$PROJECT_DIR$/src/sample/SettingsFXML" />
       <recent name="$PROJECT_DIR$/src/sample/ListCell" />
     </key>
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="sample.ListCell" />
+    </key>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="Applet">
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
       <option name="VMOptions" />
       <option name="arguments" />
@@ -154,12 +204,6 @@
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
       <Port>5050</Port>
-    </configuration>
-    <configuration default="true" type="Applet">
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
     </configuration>
     <configuration name="Main" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="sample.Main" />
@@ -215,6 +259,7 @@
       </method>
     </configuration>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -310,13 +355,12 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="true" />
@@ -326,73 +370,12 @@
     <MESSAGE value="Initial Commit" />
     <MESSAGE value="Resolution change" />
     <MESSAGE value="Major changes&#10;&#10;Fixed scaling when adding printer item&#10;Fixed image scaling when auto scaling image to printer" />
-    <option name="LAST_COMMIT_MESSAGE" value="Major changes&#10;&#10;Fixed scaling when adding printer item&#10;Fixed image scaling when auto scaling image to printer" />
+    <MESSAGE value="Major overhaul of old dependencys" />
+    <option name="LAST_COMMIT_MESSAGE" value="Major overhaul of old dependencys" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
-  <component name="WindowStateProjectService">
-    <state x="917" y="560" width="814" height="840" key="#Project_Structure" timestamp="1574047444575">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="917" y="560" width="814" height="840" key="#Project_Structure/0.0.2560.1400@0.0.2560.1400" timestamp="1574047444575" />
-    <state x="1170" y="796" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1573411607186">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="1170" y="796" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1573411607186" />
-    <state x="1105" y="685" key="FileChooserDialogImpl" timestamp="1574050485414">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="1105" y="685" key="FileChooserDialogImpl/0.0.2560.1400@0.0.2560.1400" timestamp="1574050485414" />
-    <state x="1725" y="875" width="262" height="211" key="Github.ShareDialog" timestamp="1574044734117">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="1725" y="875" width="262" height="211" key="Github.ShareDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1574044734117" />
-    <state width="2517" height="246" key="GridCell.Tab.0.bottom" timestamp="1574051805292">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state width="2517" height="246" key="GridCell.Tab.0.bottom/0.0.2560.1400@0.0.2560.1400" timestamp="1574051805292" />
-    <state width="2517" height="246" key="GridCell.Tab.0.center" timestamp="1574051805292">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state width="2517" height="246" key="GridCell.Tab.0.center/0.0.2560.1400@0.0.2560.1400" timestamp="1574051805292" />
-    <state width="2517" height="246" key="GridCell.Tab.0.left" timestamp="1574051805292">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state width="2517" height="246" key="GridCell.Tab.0.left/0.0.2560.1400@0.0.2560.1400" timestamp="1574051805292" />
-    <state width="2517" height="246" key="GridCell.Tab.0.right" timestamp="1574051805292">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state width="2517" height="246" key="GridCell.Tab.0.right/0.0.2560.1400@0.0.2560.1400" timestamp="1574051805292" />
-    <state x="827" y="586" key="SettingsEditor" timestamp="1574051991627">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="827" y="586" key="SettingsEditor/0.0.2560.1400@0.0.2560.1400" timestamp="1574051991627" />
-    <state x="904" y="276" key="Vcs.Push.Dialog.v2" timestamp="1574048290108">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="904" y="276" key="Vcs.Push.Dialog.v2/0.0.2560.1400@0.0.2560.1400" timestamp="1574048290108" />
-    <state x="711" y="143" width="1200" height="800" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1574045072101">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="711" y="143" width="1200" height="800" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1574045072101" />
-    <state x="997" y="768" key="com.intellij.ide.util.TipDialog" timestamp="1574046819372">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="997" y="768" key="com.intellij.ide.util.TipDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1574046819372" />
-    <state x="1059" y="867" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1573414768935">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="1059" y="867" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.2560.1400@0.0.2560.1400" timestamp="1573414768935" />
-    <state x="1118" y="454" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1574047594698">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="1118" y="454" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.2560.1400@0.0.2560.1400" timestamp="1574047594698" />
-    <state x="1216" y="649" key="refactoring.ChangeSignatureDialog" timestamp="1573426512463">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="1216" y="649" key="refactoring.ChangeSignatureDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1573426512463" />
-    <state x="1163" y="503" key="run.anything.popup" timestamp="1573508153427">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="1163" y="503" key="run.anything.popup/0.0.2560.1400@0.0.2560.1400" timestamp="1573508153427" />
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
