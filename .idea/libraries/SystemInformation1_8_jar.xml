@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="SystemInformation1_8_jar">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/SystemInformation1_8_jar.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

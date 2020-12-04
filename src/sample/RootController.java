@@ -14,6 +14,7 @@ import javafx.scene.web.WebView;
 import javafx.util.Pair;
 import output.PrinterOutputStream;
 import sample.SettingsFXML.SettingsController;
+import sample.epostTab.EpostController;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -120,8 +121,9 @@ public class RootController {
 //        JFXOptionPane.showChoiceDialog(pair.getValue().getAvailablePrinters().toArray(new PrintService[0]), "Skrivare", "Skrivare", "Använd någon av följande skrivare för utskrift");
     }
 
-    public void setEpostTab(Pair<Node, Object> pair) {
+    public void setEpostTab(Pair<Node, EpostController> pair) {
         epostTab_Tab.setContent(pair.getKey());
+
     }
 
 
