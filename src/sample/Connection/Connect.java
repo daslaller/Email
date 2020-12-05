@@ -42,7 +42,7 @@ public class Connect {
     static {
         FETCHPROFILE = new FetchProfile();
         FETCHPROFILE.add(IMAPFolder.FetchProfileItem.ENVELOPE);
-        FETCHPROFILE.add(IMAPFolder.FetchProfileItem.HEADERS);
+        FETCHPROFILE.add(IMAPFolder.FetchProfileItem.INTERNALDATE);
     }
 
     public Connect(String mail, String passwd, int port, String host) {
