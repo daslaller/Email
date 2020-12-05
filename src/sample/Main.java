@@ -28,10 +28,9 @@ import java.util.logging.Logger;
 
 @SuppressWarnings("WeakerAccess")
 public class Main extends Application {
-    public static Pair<Node, RootController> squibMain = getMAIN();
+    public static Pair<Node, RootController> squibMain;
     public static ConnectionSettings currentConnectionSettings;
     public static Connect currentConnection;
-    public Gson gson = new GsonBuilder().create();
     public static Pair<Node, EpostController> epostCellFXML;
     public static Pair<Node, SettingsController> settingsFXML;
     public static DateTimeFormatter PROJECT_DATE_FORMAT;
@@ -40,9 +39,11 @@ public class Main extends Application {
         PROJECT_DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
     }
 
+    public Gson gson = new GsonBuilder().create();
+
     @Override
     public void start(Stage primaryStage) {
-
+        squibMain = getMAIN();
         Parent root = (Parent) squibMain.getKey();
         primaryStage.setTitle("EmailPos80");
         primaryStage.setScene(new Scene(root, 1024, 768));
@@ -63,16 +64,19 @@ public class Main extends Application {
             currentConnectionSettings = gson.fromJson(new FileReader("Settings.json"), ConnectionSettings.class);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            System.err.println("System didnt find essential settingsfile, exiting application");
-
-            Pair<String, String> userPasswordPair = JFXOptionPane.showLoginDialog("Settings couldnt be found!", "You need to create a settings file!", "");
-            String host = JFXOptionPane.showInputDialog("Please provide host", "Host needed!", "Specify host here");
-            String portString = JFXOptionPane.showInputDialog("Please provide port", "No port found", "Leave empty for default port 993");
-            int port = (portString == null || portString.isEmpty() ? 993 : Integer.parseInt(portString));
-
-            currentConnectionSettings = new ConnectionSettings(userPasswordPair.getKey(), userPasswordPair.getValue(), port, host);
-
             try {
+                Pair<String, String> userPasswordPair = JFXOptionPane.showLoginDialog("Settings couldnt be found!",
+                        "You need to create a settings file!", "");
+
+                String host = JFXOptionPane.showInputDialog("Please provide host", "Host needed!", "Specify host here");
+                String portString = JFXOptionPane.showInputDialog("Please provide port", "No port found",
+                        "Leave empty for default port 993");
+
+                int port = (portString == null || portString.isEmpty() ? 993 : Integer.parseInt(portString));
+
+                currentConnectionSettings = new ConnectionSettings(userPasswordPair.getKey(),
+                        userPasswordPair.getValue(), port, host);
+
                 gson.toJson(currentConnectionSettings, new FileWriter("Settings.json"));
                 Logger.getGlobal().log(Level.INFO, "User has input settings: " + currentConnectionSettings);
             } catch (IOException ioException) {
@@ -80,19 +84,17 @@ public class Main extends Application {
             }
         }
 
-        currentConnection = new Connect(currentConnectionSettings.mail, currentConnectionSettings.passwd, currentConnectionSettings.port, currentConnectionSettings.host);
+        currentConnection = new Connect(currentConnectionSettings.mail, currentConnectionSettings.passwd,
+                currentConnectionSettings.port, currentConnectionSettings.host);
         currentConnection.initiateConnection(1);
 
         epostCellFXML.getValue().setConnection(currentConnection);
 
-
     }
-
 
     public static void main(String[] args) {
         launch(args);
     }
-
 
     public static Pair<Node, RootController> getMAIN() {
         try {
