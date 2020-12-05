@@ -1,6 +1,5 @@
 package sample.Connection;
 
-
 import com.sun.mail.imap.IMAPFolder;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
@@ -26,8 +25,7 @@ public class Connect {
     int port;
     String host;
 
-    boolean isConnectionLive = false;
-
+    // boolean isConnectionLive = false;
 
     private SimpleObjectProperty<Store> storeSimpleObjectProperty;
     private SimpleObjectProperty<IMAPFolder> imapFolderSimpleObjectProperty;
@@ -44,6 +42,7 @@ public class Connect {
     static {
         FETCHPROFILE = new FetchProfile();
         FETCHPROFILE.add(IMAPFolder.FetchProfileItem.ENVELOPE);
+        FETCHPROFILE.add(IMAPFolder.FetchProfileItem.HEADERS);
     }
 
     public Connect(String mail, String passwd, int port, String host) {
@@ -68,11 +67,12 @@ public class Connect {
             try {
                 Store store = session.getStore();
                 store.connect(mail, passwd);
-                store.addConnectionListener(resetConnectionAdapter);
-                isConnectionLive = true;
-                storeSimpleObjectProperty().set(store);
+                // store.addConnectionListener(resetConnectionAdapter);
+                // isConnectionLive = store.isConnected();
 
                 IMAPFolder folder = (IMAPFolder) store.getFolder("INBOX");
+
+                storeSimpleObjectProperty().set(store);
                 imapFolderSimpleObjectProperty().set(folder);
                 break;
 
@@ -82,7 +82,6 @@ public class Connect {
         }
     }
 
-
     public Message getLastMessage() {
         return messagesObservableListSimpleObjectProperty().get().get(0);
     }
@@ -91,13 +90,18 @@ public class Connect {
         return lastReceivedMessageSimpleObjectProperty().get();
     }
 
+    public boolean isConnected() {
+        return (storeSimpleObjectProperty() != null && storeSimpleObjectProperty().isNotNull().get() && storeSimpleObjectProperty().get().isConnected());
+    }
+
     MessageCountAdapter listenForMessageMessageCountAdapter = new MessageCountAdapter() {
         @Override
         public void messagesAdded(MessageCountEvent e) {
             try {
                 super.messagesAdded(e);
                 System.out.println("Got " + e.getMessages().length + " new message/s!");
-                messagesObservableListSimpleObjectProperty().set(FXCollections.observableArrayList(imapFolderSimpleObjectProperty().get().getMessages()));
+                messagesObservableListSimpleObjectProperty()
+                        .set(FXCollections.observableArrayList(imapFolderSimpleObjectProperty().get().getMessages()));
                 lastReceivedMessageSimpleObjectProperty().set(e.getMessages());
             } catch (MessagingException messagingException) {
                 messagingException.printStackTrace();
@@ -109,11 +113,13 @@ public class Connect {
         @Override
         public void opened(ConnectionEvent e) {
             super.opened(e);
+            // isConnectionLive = storeSimpleObjectProperty().get().isConnected();
         }
 
         @Override
         public void disconnected(ConnectionEvent e) {
             super.disconnected(e);
+            // isConnectionLive = storeSimpleObjectProperty().get().isConnected();
             if (AUTO_RETRY_ON_CONNECTION_FAILURE) {
                 initiateConnection(1);
             }
@@ -122,6 +128,7 @@ public class Connect {
         @Override
         public void closed(ConnectionEvent e) {
             super.closed(e);
+            // isConnectionLive = storeSimpleObjectProperty().get().isConnected();
             if (AUTO_RETRY_ON_CONNECTION_FAILURE) {
                 initiateConnection(1);
             }
@@ -131,7 +138,10 @@ public class Connect {
     public SimpleObjectProperty<ObservableList<Message>> messagesObservableListSimpleObjectProperty() {
         if (messageListObservableListSimpleObjectProperty == null) {
             Callable<SimpleObjectProperty<ObservableList<Message>>> call = () -> {
-                SimpleObjectProperty<ObservableList<Message>> newObject = new SimpleObjectProperty<>(FXCollections.observableArrayList(imapFolderSimpleObjectProperty().get().getMessages()));
+
+                SimpleObjectProperty<ObservableList<Message>> newObject = new SimpleObjectProperty<>(
+                        FXCollections.observableArrayList(imapFolderSimpleObjectProperty().get().getMessages()));
+
                 newObject.addListener((observable, oldValue, newValue) -> {
                     if (oldValue != null && Objects.deepEquals(oldValue, newValue)) {
                         System.out.println("Message stack updated!");
@@ -157,12 +167,27 @@ public class Connect {
             Callable<SimpleObjectProperty<Store>> call = () -> {
                 SimpleObjectProperty<Store> newObject = new SimpleObjectProperty<>();
                 newObject.addListener((observable, oldValue, newValue) -> {
-                    if (oldValue != null && !oldValue.equals(newValue)) {
-                        System.out.println("A new store has been registered, new: " + newValue + " old: " + oldValue);
-                        System.out.println("Is new store connected? " + (newValue.isConnected() ? "Yes" : "No"));
-                    } else {
-                        System.out.println("It seems an update was pushed to store variable, but no change was detected! If you see this for the first time ignore this :)");
+                    newValue.addConnectionListener(resetConnectionAdapter);
+                    if (oldValue != null) {
+                        oldValue.removeConnectionListener(resetConnectionAdapter);
+                        if (oldValue.isConnected()) {
+                            try {
+                                oldValue.close();
+                            } catch (MessagingException e) {
+                                e.printStackTrace();
+                                Logger.getGlobal().log(Level.SEVERE, "Couldnt disconnect old connection!", e);
+                            }
+                        }
+                        if (!oldValue.equals(newValue)) {
+                            System.out
+                                    .println("A new store has been registered, new: " + newValue + " old: " + oldValue);
+                            System.out.println("Is new store connected? " + (newValue.isConnected() ? "Yes" : "No"));
+                        } else {
+                            System.out.println(
+                                    "It seems an update was pushed to store variable, but no change was detected! If you see this for the first time ignore this :)");
+                        }
                     }
+
                 });
                 return newObject;
             };
@@ -183,15 +208,19 @@ public class Connect {
 
                 newObject.addListener((observable, oldValue, newValue) -> {
                     try {
-                        if (oldValue != null && !oldValue.equals(newValue)) {
-                            System.out.println("A new IMAPfolder has been registered, new: " + newValue + " old: " + oldValue);
-                            System.out.println("Is new IMAPfolder open? " + (newValue.isOpen() ? "Yes" : "No"));
+                        if (oldValue != null) {
                             if (oldValue.isOpen()) {
-                                System.out.println("Closing old folder");
                                 oldValue.close();
+                                Logger.getGlobal().log(Level.INFO, "Closing connection of old folder: " + oldValue);
                             }
-                        } else {
-                            System.out.println("It seems that an update was pushed to the IMAPfolder but no change was detected! If you see this for the first time ignore this :)");
+                            if (!Objects.deepEquals(oldValue, newObject)) {
+                                System.out.println(
+                                        "A new IMAPfolder has been registered, new: " + newValue + " old: " + oldValue);
+                                System.out.println("Is new IMAPfolder open? " + (newValue.isOpen() ? "Yes" : "No"));
+                            } else {
+                                System.out.println(
+                                        "It seems that an update was pushed to the IMAPfolder but no change was detected! If you see this for the first time ignore this :)");
+                            }
                         }
 
                         newValue.open(IMAPFolder.READ_ONLY);
@@ -199,14 +228,14 @@ public class Connect {
                         Logger.getGlobal().log(Level.FINE, "Added message count adapter as listener");
                         Logger.getGlobal().log(Level.FINE, "Opening imap folder: " + newValue);
 
-
                         Task<Object> idleTask = new Task<Object>() {
                             @Override
                             protected Object call() {
                                 int cycles = 0;
                                 while (!isCancelled()) {
                                     try {
-                                        updateTitle(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss").format(LocalDateTime.now()));
+                                        updateTitle(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss")
+                                                .format(LocalDateTime.now()));
                                         updateMessage("Cycle: " + (cycles++));
                                         newValue.idle();
                                         Thread.sleep(15000);
@@ -220,12 +249,12 @@ public class Connect {
                         Task<Message[]> fetchTask = new Task<Message[]>() {
                             @Override
                             protected Message[] call() throws Exception {
-                                updateTitle(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss").format(LocalDateTime.now()));
+                                updateTitle(
+                                        DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss").format(LocalDateTime.now()));
                                 newValue.fetch(newValue.getMessages(), FETCHPROFILE);
                                 return newValue.getMessages();
                             }
                         };
-
 
                         fetchThreadSimpleObjectProperty().set(fetchTask);
                         idleThreadSimpleObjectProperty().set(idleTask);
@@ -281,7 +310,8 @@ public class Connect {
                         Thread thread = new Thread(newValue);
                         thread.setDaemon(true);
                         thread.start();
-                        newValue.setOnSucceeded(workerStateEvent -> messagesObservableListSimpleObjectProperty().set(FXCollections.observableArrayList(newValue.getValue())));
+                        newValue.setOnSucceeded(workerStateEvent -> messagesObservableListSimpleObjectProperty()
+                                .set(FXCollections.observableArrayList(newValue.getValue())));
                     }
 
                     if (oldValue != null && oldValue.isRunning()) {
@@ -307,4 +337,3 @@ public class Connect {
     }
 
 }
-

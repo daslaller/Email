@@ -41,16 +41,16 @@ public class EpostController {
                 } else {
                     try {
                         setText("Loading...");
-//                        setDisabled(true);
+                        setDisabled(true);
                         Task<String> getSubjectTask = new Task<String>() {
                             @Override
                             protected String call() throws Exception {
                                 return item.getSubject() + " " + item.getSentDate();
                             }
-                        };
+                        };                 
                         getSubjectTask.setOnSucceeded(workerStateEvent -> {
                             setText(getSubjectTask.getValue());
-//                            setDisabled(false);
+                            setDisabled(false);
                         });
                         Thread getSubjectTaskThread = new Thread(getSubjectTask);
                         getSubjectTaskThread.setDaemon(true);
