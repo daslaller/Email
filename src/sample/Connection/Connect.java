@@ -1,5 +1,6 @@
 package sample.Connection;
 
+import com.company.JFXOptionPane;
 import com.sun.mail.imap.IMAPFolder;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
@@ -42,7 +43,7 @@ public class Connect {
     static {
         FETCHPROFILE = new FetchProfile();
         FETCHPROFILE.add(IMAPFolder.FetchProfileItem.ENVELOPE);
-        FETCHPROFILE.add(IMAPFolder.FetchProfileItem.HEADERS);
+        FETCHPROFILE.add(IMAPFolder.FetchProfileItem.INTERNALDATE);
     }
 
     public Connect(String mail, String passwd, int port, String host) {
@@ -67,8 +68,6 @@ public class Connect {
             try {
                 Store store = session.getStore();
                 store.connect(mail, passwd);
-                // store.addConnectionListener(resetConnectionAdapter);
-                // isConnectionLive = store.isConnected();
 
                 IMAPFolder folder = (IMAPFolder) store.getFolder("INBOX");
 
@@ -91,7 +90,8 @@ public class Connect {
     }
 
     public boolean isConnected() {
-        return (storeSimpleObjectProperty() != null && storeSimpleObjectProperty().isNotNull().get() && storeSimpleObjectProperty().get().isConnected());
+        return (storeSimpleObjectProperty() != null && storeSimpleObjectProperty().isNotNull().get()
+                && storeSimpleObjectProperty().get().isConnected());
     }
 
     MessageCountAdapter listenForMessageMessageCountAdapter = new MessageCountAdapter() {
@@ -113,13 +113,13 @@ public class Connect {
         @Override
         public void opened(ConnectionEvent e) {
             super.opened(e);
-            // isConnectionLive = storeSimpleObjectProperty().get().isConnected();
+
         }
 
         @Override
         public void disconnected(ConnectionEvent e) {
             super.disconnected(e);
-            // isConnectionLive = storeSimpleObjectProperty().get().isConnected();
+
             if (AUTO_RETRY_ON_CONNECTION_FAILURE) {
                 initiateConnection(1);
             }
@@ -128,7 +128,7 @@ public class Connect {
         @Override
         public void closed(ConnectionEvent e) {
             super.closed(e);
-            // isConnectionLive = storeSimpleObjectProperty().get().isConnected();
+
             if (AUTO_RETRY_ON_CONNECTION_FAILURE) {
                 initiateConnection(1);
             }
@@ -306,16 +306,17 @@ public class Connect {
             Callable<SimpleObjectProperty<Task<Message[]>>> call = () -> {
                 SimpleObjectProperty<Task<Message[]>> newObject = new SimpleObjectProperty<>();
                 newObject.addListener((observable, oldValue, newValue) -> {
+                    if (oldValue != null && oldValue.isRunning()) {
+                        oldValue.cancel();
+                    }
                     if (newValue != null && !newValue.isRunning()) {
                         Thread thread = new Thread(newValue);
                         thread.setDaemon(true);
                         thread.start();
                         newValue.setOnSucceeded(workerStateEvent -> messagesObservableListSimpleObjectProperty()
                                 .set(FXCollections.observableArrayList(newValue.getValue())));
-                    }
-
-                    if (oldValue != null && oldValue.isRunning()) {
-                        oldValue.cancel();
+                    } else {
+                        JFXOptionPane.showMessageDialog("already running!");
                     }
                 });
                 return newObject;

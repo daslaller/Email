@@ -2,6 +2,7 @@ package sample.epostTab;
 
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.web.WebView;
@@ -26,9 +27,15 @@ public class EpostController {
     private ListView<Message> emailList;
 
     @FXML
+    private Label statusLabel;
+
+    @FXML
     void initialize() {
         assert emailWebView != null : "fx:id=\"emailWebView\" was not injected: check your FXML file 'epostCell.fxml'.";
         assert emailList != null : "fx:id=\"emailList\" was not injected: check your FXML file 'epostCell.fxml'.";
+        assert statusLabel != null : "fx:id=\"statusLabel\" was not injected: check your FXML file 'epostCell.fxml'.";
+        emailList.itemsProperty()
+                .addListener((oldValue, newValue, currentValue) -> statusLabel.setText(newValue.size() + ""));
     }
 
     public void setConnection(Connect connect) {
@@ -47,7 +54,7 @@ public class EpostController {
                             protected String call() throws Exception {
                                 return item.getSubject() + " " + item.getSentDate();
                             }
-                        };                 
+                        };
                         getSubjectTask.setOnSucceeded(workerStateEvent -> {
                             setText(getSubjectTask.getValue());
                             setDisabled(false);
