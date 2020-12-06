@@ -1,16 +1,21 @@
 package sample.epostTab;
 
+import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.web.WebView;
+import sample.Main;
 import sample.Connection.Connect;
 
 import javax.mail.Message;
+import javax.mail.MessagingException;
+
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.concurrent.Callable;
 
 public class EpostController {
 
@@ -36,10 +41,6 @@ public class EpostController {
         assert statusLabel != null : "fx:id=\"statusLabel\" was not injected: check your FXML file 'epostCell.fxml'.";
         emailList.itemsProperty()
                 .addListener((oldValue, newValue, currentValue) -> statusLabel.setText(newValue.size() + ""));
-    }
-
-    public void setConnection(Connect connect) {
-        emailList.itemsProperty().bind(connect.messagesObservableListSimpleObjectProperty());
         emailList.setCellFactory(messageListView -> new ListCell<Message>() {
             public void updateItem(Message item, boolean empty) {
                 super.updateItem(item, empty);
@@ -48,7 +49,6 @@ public class EpostController {
                 } else {
                     try {
                         setText("Loading...");
-                        setDisabled(true);
                         Task<String> getSubjectTask = new Task<String>() {
                             @Override
                             protected String call() throws Exception {
@@ -57,18 +57,28 @@ public class EpostController {
                         };
                         getSubjectTask.setOnSucceeded(workerStateEvent -> {
                             setText(getSubjectTask.getValue());
-                            setDisabled(false);
                         });
+
                         Thread getSubjectTaskThread = new Thread(getSubjectTask);
                         getSubjectTaskThread.setDaemon(true);
-                        getSubjectTaskThread.start();
+                        
+                        if (!Main.currentConnection.fetchThreadSimpleObjectProperty().get().isRunning()) {
+                            getSubjectTaskThread.start();
+                        } else {
+                            Main.currentConnection.fetchThreadSimpleObjectProperty().get()
+                                    .setOnSucceeded(workerStateEvent -> {
+                                        getSubjectTaskThread.start();
+                                    });
+                        }
                     } catch (Exception e) {
                         e.printStackTrace();
-                        setText(null);
                     }
                 }
             }
         });
+    }
 
+    public void setConnection(Connect connect) {
+        emailList.itemsProperty().bind(connect.messagesObservableListSimpleObjectProperty());
     }
 }

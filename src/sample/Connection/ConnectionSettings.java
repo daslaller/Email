@@ -13,13 +13,25 @@ public class ConnectionSettings {
         this.host = host;
     }
 
+    public String getMail() {
+        return mail;
+    }
+
+    public String getPasswd() {
+        return passwd;
+    }
+
+    public int getPort() {
+        return port;
+    }
+
+    public String getHost() {
+        return host;
+    }
+
     @Override
     public String toString() {
-        return "ConnectionSettings{" +
-                "mail='" + mail + '\'' +
-                ", passwd='" + passwd + '\'' +
-                ", port=" + port +
-                ", host='" + host + '\'' +
-                '}';
+        return "ConnectionSettings{" + "mail='" + mail + '\'' + ", passwd='" + passwd + '\'' + ", port=" + port
+                + ", host='" + host + '\'' + '}';
     }
 }

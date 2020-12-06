@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 
 import javax.mail.*;
+import javax.mail.UIDFolder.FetchProfileItem;
 import javax.mail.event.ConnectionAdapter;
 import javax.mail.event.ConnectionEvent;
 import javax.mail.event.MessageCountAdapter;
@@ -42,7 +43,7 @@ public class Connect {
 
     static {
         FETCHPROFILE = new FetchProfile();
-        FETCHPROFILE.add(IMAPFolder.FetchProfileItem.ENVELOPE);
+        FETCHPROFILE.add(FetchProfileItem.ENVELOPE);
         FETCHPROFILE.add(IMAPFolder.FetchProfileItem.INTERNALDATE);
     }
 
@@ -51,6 +52,10 @@ public class Connect {
         this.passwd = Objects.requireNonNull(passwd, "Password cannot be null!");
         this.host = Objects.requireNonNull(host, "Host cannot be null!");
         this.port = port;
+    }
+
+    public Connect(ConnectionSettings connectionSettings) {
+        this(connectionSettings.mail, connectionSettings.passwd, connectionSettings.port, connectionSettings.host);
     }
 
     public void initiateConnection(int retries) {
@@ -97,15 +102,19 @@ public class Connect {
     MessageCountAdapter listenForMessageMessageCountAdapter = new MessageCountAdapter() {
         @Override
         public void messagesAdded(MessageCountEvent e) {
-            try {
-                super.messagesAdded(e);
-                System.out.println("Got " + e.getMessages().length + " new message/s!");
-                messagesObservableListSimpleObjectProperty()
-                        .set(FXCollections.observableArrayList(imapFolderSimpleObjectProperty().get().getMessages()));
-                lastReceivedMessageSimpleObjectProperty().set(e.getMessages());
-            } catch (MessagingException messagingException) {
-                messagingException.printStackTrace();
+            super.messagesAdded(e);
+            System.out.println("Got " + e.getMessages().length + " new message/s!");
+
+            if (fetchThreadSimpleObjectProperty().isNull().get()
+                    || !fetchThreadSimpleObjectProperty().get().isRunning()) {
+                try {
+                    messagesObservableListSimpleObjectProperty().set(
+                            FXCollections.observableArrayList(imapFolderSimpleObjectProperty().get().getMessages()));
+                } catch (MessagingException e1) {
+                    e1.printStackTrace();
+                }
             }
+            lastReceivedMessageSimpleObjectProperty().set(e.getMessages());
         }
     };
 
@@ -306,15 +315,16 @@ public class Connect {
             Callable<SimpleObjectProperty<Task<Message[]>>> call = () -> {
                 SimpleObjectProperty<Task<Message[]>> newObject = new SimpleObjectProperty<>();
                 newObject.addListener((observable, oldValue, newValue) -> {
-                    if (oldValue != null && oldValue.isRunning()) {
+                    if (oldValue != null && (oldValue.isRunning() || !oldValue.isDone())) {
                         oldValue.cancel();
                     }
                     if (newValue != null && !newValue.isRunning()) {
+                        newValue.setOnSucceeded(workerStateEvent -> messagesObservableListSimpleObjectProperty()
+                                .set(FXCollections.observableArrayList(newValue.getValue())));
                         Thread thread = new Thread(newValue);
                         thread.setDaemon(true);
                         thread.start();
-                        newValue.setOnSucceeded(workerStateEvent -> messagesObservableListSimpleObjectProperty()
-                                .set(FXCollections.observableArrayList(newValue.getValue())));
+
                     } else {
                         JFXOptionPane.showMessageDialog("already running!");
                     }

@@ -4,7 +4,10 @@ import com.company.JFXOptionPane;
 import com.company.Resource;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
+
 import javafx.application.Application;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -29,64 +32,71 @@ import java.util.logging.Logger;
 @SuppressWarnings("WeakerAccess")
 public class Main extends Application {
     public static Pair<Node, RootController> squibMain;
-    public static ConnectionSettings currentConnectionSettings;
+    // public static ConnectionSettings currentConnectionSettings;
     public static Connect currentConnection;
     public static Pair<Node, EpostController> epostCellFXML;
     public static Pair<Node, SettingsController> settingsFXML;
     public static DateTimeFormatter PROJECT_DATE_FORMAT;
 
     static {
+        // Project dateformat, should be used for all date prints.
         PROJECT_DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
     }
 
     public Gson gson = new GsonBuilder().create();
 
+    private SimpleObjectProperty<ConnectionSettings> currentConnectionSettingsSimpleObjectProperty;
+
     @Override
     public void start(Stage primaryStage) {
+
         squibMain = getMAIN();
         Parent root = (Parent) squibMain.getKey();
         primaryStage.setTitle("EmailPos80");
         primaryStage.setScene(new Scene(root, 1024, 768));
         primaryStage.show();
         primaryStage.setOnCloseRequest(windowEvent -> {
-            if (currentConnectionSettings != null) {
-                try {
-                    gson.toJson(currentConnectionSettings, new FileWriter("settings.json", true));
-                    System.out.println("Wrote new settings file!");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
-        });
-
-        try {
-            currentConnectionSettings = gson.fromJson(new FileReader("Settings.json"), ConnectionSettings.class);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
             try {
-                Pair<String, String> userPasswordPair = JFXOptionPane.showLoginDialog("Settings couldnt be found!",
-                        "You need to create a settings file!", "");
-
-                String host = JFXOptionPane.showInputDialog("Please provide host", "Host needed!", "Specify host here");
-                String portString = JFXOptionPane.showInputDialog("Please provide port", "No port found",
-                        "Leave empty for default port 993");
-
-                int port = (portString == null || portString.isEmpty() ? 993 : Integer.parseInt(portString));
-
-                currentConnectionSettings = new ConnectionSettings(userPasswordPair.getKey(),
-                        userPasswordPair.getValue(), port, host);
-
-                gson.toJson(currentConnectionSettings, new FileWriter("Settings.json"));
-                Logger.getGlobal().log(Level.INFO, "User has input settings: " + currentConnectionSettings);
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
+                // Force full write to settings.json on exit, even if file contents are equal -
+                // just to be sure
+                gson.toJson(currentConnectionSettingsSimpleObjectProperty().get(),
+                        new FileWriter("settings.json", true));
+                System.out
+                        .println("Wrote new settings file!\n" + currentConnectionSettingsSimpleObjectProperty().get());
+            } catch (IOException e) {
+                e.printStackTrace();
             }
+        });
+        try {
+            currentConnectionSettingsSimpleObjectProperty()
+                    .set(gson.fromJson(new FileReader("Settings.json"), ConnectionSettings.class));
+        } catch (FileNotFoundException e) {
+
+            e.printStackTrace();
+            Pair<String, String> userPasswordPair = JFXOptionPane.showLoginDialog("Settings couldnt be found!",
+                    "You need to create a settings file!", "");
+
+            String host = JFXOptionPane.showInputDialog("Please provide host", "Host needed!", "Specify host here");
+            String portString = JFXOptionPane.showInputDialog("Please provide port", "No port found",
+                    "Leave empty for default port 993");
+
+            int port = ((portString == null || portString.isEmpty()) ? 993 : Integer.parseInt(portString));
+
+            currentConnectionSettingsSimpleObjectProperty()
+                    .set(new ConnectionSettings(userPasswordPair.getKey(), userPasswordPair.getValue(), port, host));
+            // currentConnectionSettings = new ConnectionSettings(userPasswordPair.getKey(),
+            // userPasswordPair.getValue(), port, host);
+            Logger.getGlobal().log(Level.INFO,
+                    "User has input settings: " + currentConnectionSettingsSimpleObjectProperty().get());
         }
 
-        currentConnection = new Connect(currentConnectionSettings.mail, currentConnectionSettings.passwd,
-                currentConnectionSettings.port, currentConnectionSettings.host);
-        currentConnection.initiateConnection(1);
+        // currentConnection = new
+        // Connect(currentConnectionSettingsSimpleObjectProperty().get().mail,
+        // currentConnectionSettingsSimpleObjectProperty().get().passwd,
+        // currentConnectionSettingsSimpleObjectProperty().get().port,
+        // currentConnectionSettingsSimpleObjectProperty().get().host);
+        currentConnection = new Connect(currentConnectionSettingsSimpleObjectProperty().get());
+        currentConnection.initiateConnection(3);
 
         epostCellFXML.getValue().setConnection(currentConnection);
 
@@ -148,5 +158,35 @@ public class Main extends Application {
         System.err.println("Couldn't find Settings!");
         System.exit(-2);
         return null;
+    }
+
+    public SimpleObjectProperty<ConnectionSettings> currentConnectionSettingsSimpleObjectProperty() {
+
+        if (currentConnectionSettingsSimpleObjectProperty == null) {
+
+            currentConnectionSettingsSimpleObjectProperty = new SimpleObjectProperty<>();
+
+            currentConnectionSettingsSimpleObjectProperty.addListener((currentValue, oldValue, newValue) -> {
+
+                if (newValue != null && !Objects.deepEquals(newValue, oldValue)) {
+                    // try {
+                    String json = gson.toJson(newValue);
+                    JFXOptionPane.showMessageDialog(json);
+                    try (FileWriter fileWriter = new FileWriter("Settings.json")) {
+                        fileWriter.write(json);
+                        Logger.getGlobal().log(Level.INFO, "Update of settingsfile pushed.");
+                        JFXOptionPane.showMessageDialog("Pushed!");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    Logger.getGlobal().log(Level.INFO, ("No update of settingsfile has been done, they should be equal."
+                            + "\nOldvalue: " + oldValue.toString() + "\nNewvalue: " + newValue.toString()));
+                    JFXOptionPane.showMessageDialog(
+                            "Throw setting\nOldvalue: " + oldValue.toString() + "\nNewvalue: " + newValue.toString());
+                }
+            });
+        }
+        return currentConnectionSettingsSimpleObjectProperty;
     }
 }
