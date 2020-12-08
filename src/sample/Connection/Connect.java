@@ -44,7 +44,11 @@ public class Connect {
 
     static {
         FETCHPROFILE = new FetchProfile();
+<<<<<<< HEAD
         FETCHPROFILE.add(FetchProfileItem.ENVELOPE);
+=======
+        FETCHPROFILE.add(IMAPFolder.FetchProfileItem.ENVELOPE);
+>>>>>>> 5c54dab28a1868f666a52ba2786616ece27fd73f
         FETCHPROFILE.add(IMAPFolder.FetchProfileItem.INTERNALDATE);
     }
 
