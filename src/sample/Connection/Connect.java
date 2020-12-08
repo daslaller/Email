@@ -50,10 +50,6 @@ public class Connect {
 
     public Connect(String mail, String passwd, int port, String host) {
         this(new ConnectionSettings(mail, passwd, port, host));
-        // this.mail = Objects.requireNonNull(mail, "Mail cannot be null!");
-        // this.passwd = Objects.requireNonNull(passwd, "Password cannot be null!");
-        // this.host = Objects.requireNonNull(host, "Host cannot be null!");
-        // this.port = port;
     }
 
     public Connect(ConnectionSettings connectionSettings) {
@@ -62,8 +58,6 @@ public class Connect {
         this.host = Objects.requireNonNull(connectionSettings.host, "Host cannot be null!");
         this.port = Objects.requireNonNull(connectionSettings.port, "Port cannot be null!");
 
-        // this(connectionSettings.mail, connectionSettings.passwd,
-        // connectionSettings.port, connectionSettings.host);
     }
 
     public void initiateConnection(int retries) {

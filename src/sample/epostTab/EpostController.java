@@ -70,7 +70,7 @@ public class EpostController {
                                     .setOnSucceeded(workerStateEvent -> {
                                         getSubjectTaskThread.start();
                                     });
-                            setText("Pushed in future!");
+                            setText("Populating list!!");
                         }
                     } catch (Exception e) {
                         e.printStackTrace();

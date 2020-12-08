@@ -84,17 +84,11 @@ public class Main extends Application {
 
             currentConnectionSettingsSimpleObjectProperty()
                     .set(new ConnectionSettings(userPasswordPair.getKey(), userPasswordPair.getValue(), port, host));
-            // currentConnectionSettings = new ConnectionSettings(userPasswordPair.getKey(),
-            // userPasswordPair.getValue(), port, host);
+
             Logger.getGlobal().log(Level.INFO,
                     "User has input settings: " + currentConnectionSettingsSimpleObjectProperty().get());
         }
 
-        // currentConnection = new
-        // Connect(currentConnectionSettingsSimpleObjectProperty().get().mail,
-        // currentConnectionSettingsSimpleObjectProperty().get().passwd,
-        // currentConnectionSettingsSimpleObjectProperty().get().port,
-        // currentConnectionSettingsSimpleObjectProperty().get().host);
         currentConnection = new Connect(currentConnectionSettingsSimpleObjectProperty().get());
         currentConnection.initiateConnection(3);
 
