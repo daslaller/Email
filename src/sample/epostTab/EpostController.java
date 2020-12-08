@@ -1,6 +1,7 @@
 package sample.epostTab;
 
 import javafx.application.Platform;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -61,7 +62,7 @@ public class EpostController {
 
                         Thread getSubjectTaskThread = new Thread(getSubjectTask);
                         getSubjectTaskThread.setDaemon(true);
-                        
+
                         if (!Main.currentConnection.fetchThreadSimpleObjectProperty().get().isRunning()) {
                             getSubjectTaskThread.start();
                         } else {
@@ -69,6 +70,7 @@ public class EpostController {
                                     .setOnSucceeded(workerStateEvent -> {
                                         getSubjectTaskThread.start();
                                     });
+                            setText("Pushed in future!");
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -79,6 +81,18 @@ public class EpostController {
     }
 
     public void setConnection(Connect connect) {
-        emailList.itemsProperty().bind(connect.messagesObservableListSimpleObjectProperty());
+        connectSimpleObjectProperty().set(connect);
+    }
+
+    SimpleObjectProperty<Connect> connectSimpleObjectProperty;
+
+    public SimpleObjectProperty<Connect> connectSimpleObjectProperty() {
+        if (connectSimpleObjectProperty == null) {
+          connectSimpleObjectProperty = new SimpleObjectProperty<>();
+          connectSimpleObjectProperty.addListener((currentValue, oldValue, newValue) -> {
+            emailList.itemsProperty().bind(newValue.messagesObservableListSimpleObjectProperty());
+          });
+        }
+        return connectSimpleObjectProperty;
     }
 }

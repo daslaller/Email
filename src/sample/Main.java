@@ -43,9 +43,9 @@ public class Main extends Application {
         PROJECT_DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
     }
 
-    public Gson gson = new GsonBuilder().create();
+    public static Gson gson = new GsonBuilder().create();
 
-    private SimpleObjectProperty<ConnectionSettings> currentConnectionSettingsSimpleObjectProperty;
+    private static SimpleObjectProperty<ConnectionSettings> CURRENT_CONNECTION_SETTINGS;
 
     @Override
     public void start(Stage primaryStage) {
@@ -99,7 +99,7 @@ public class Main extends Application {
         currentConnection.initiateConnection(3);
 
         epostCellFXML.getValue().setConnection(currentConnection);
-
+        settingsFXML.getValue().setConnection(currentConnection);
     }
 
     public static void main(String[] args) {
@@ -160,13 +160,13 @@ public class Main extends Application {
         return null;
     }
 
-    public SimpleObjectProperty<ConnectionSettings> currentConnectionSettingsSimpleObjectProperty() {
+    public static SimpleObjectProperty<ConnectionSettings> currentConnectionSettingsSimpleObjectProperty() {
 
-        if (currentConnectionSettingsSimpleObjectProperty == null) {
+        if (CURRENT_CONNECTION_SETTINGS == null) {
 
-            currentConnectionSettingsSimpleObjectProperty = new SimpleObjectProperty<>();
+            CURRENT_CONNECTION_SETTINGS = new SimpleObjectProperty<>();
 
-            currentConnectionSettingsSimpleObjectProperty.addListener((currentValue, oldValue, newValue) -> {
+            CURRENT_CONNECTION_SETTINGS.addListener((currentValue, oldValue, newValue) -> {
 
                 if (newValue != null && !Objects.deepEquals(newValue, oldValue)) {
                     // try {
@@ -187,6 +187,6 @@ public class Main extends Application {
                 }
             });
         }
-        return currentConnectionSettingsSimpleObjectProperty;
+        return CURRENT_CONNECTION_SETTINGS;
     }
 }

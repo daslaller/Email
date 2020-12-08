@@ -35,6 +35,7 @@ public class Connect {
     private SimpleObjectProperty<Message[]> lastReceivedMessageSimpleObjectProperty;
     private SimpleObjectProperty<Task<Object>> idleThreadSimpleObjectProperty;
     private SimpleObjectProperty<Task<Message[]>> fetchThreadSimpleObjectProperty;
+    private SimpleObjectProperty<ConnectionSettings> connectionSettingsSimpleObjectProperty;
 
     public static boolean PARTIAL_FETCH_ENABLED = true;
     public static boolean AUTO_RETRY_ON_CONNECTION_FAILURE = true;
@@ -48,14 +49,21 @@ public class Connect {
     }
 
     public Connect(String mail, String passwd, int port, String host) {
-        this.mail = Objects.requireNonNull(mail, "Mail cannot be null!");
-        this.passwd = Objects.requireNonNull(passwd, "Password cannot be null!");
-        this.host = Objects.requireNonNull(host, "Host cannot be null!");
-        this.port = port;
+        this(new ConnectionSettings(mail, passwd, port, host));
+        // this.mail = Objects.requireNonNull(mail, "Mail cannot be null!");
+        // this.passwd = Objects.requireNonNull(passwd, "Password cannot be null!");
+        // this.host = Objects.requireNonNull(host, "Host cannot be null!");
+        // this.port = port;
     }
 
     public Connect(ConnectionSettings connectionSettings) {
-        this(connectionSettings.mail, connectionSettings.passwd, connectionSettings.port, connectionSettings.host);
+        this.mail = Objects.requireNonNull(connectionSettings.mail, "Mail cannot be null!");
+        this.passwd = Objects.requireNonNull(connectionSettings.passwd, "Password cannot be null!");
+        this.host = Objects.requireNonNull(connectionSettings.host, "Host cannot be null!");
+        this.port = Objects.requireNonNull(connectionSettings.port, "Port cannot be null!");
+
+        // this(connectionSettings.mail, connectionSettings.passwd,
+        // connectionSettings.port, connectionSettings.host);
     }
 
     public void initiateConnection(int retries) {
@@ -347,4 +355,10 @@ public class Connect {
         return lastReceivedMessageSimpleObjectProperty;
     }
 
+    public SimpleObjectProperty<ConnectionSettings> connectionSettingsSimpleObjectProperty() {
+        if (connectionSettingsSimpleObjectProperty == null) {
+            connectionSettingsSimpleObjectProperty = new SimpleObjectProperty<>();
+        }
+        return connectionSettingsSimpleObjectProperty;
+    }
 }
