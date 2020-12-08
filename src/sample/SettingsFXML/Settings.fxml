@@ -19,7 +19,7 @@
             <RowConstraints vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <JFXTextField focusColor="#1f93ff" labelFloat="true" promptText="Epost">
+            <JFXTextField fx:id="epostTextField" focusColor="#1f93ff" labelFloat="true" promptText="Epost">
                <unFocusColor>
                   <LinearGradient endX="1.0" endY="1.0" startX="0.3942307692307692" startY="0.4230769230769231">
                      <stops>
@@ -29,7 +29,18 @@
                   </LinearGradient>
                </unFocusColor>
             </JFXTextField>
-            <JFXTextField focusColor="DODGERBLUE" labelFloat="true" promptText="Lösenord" GridPane.rowIndex="1">
+            <JFXPasswordField fx:id="passwordPasswordField" focusColor="#1f93ff" promptText="Password" GridPane.rowIndex="1">
+               <unFocusColor>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop color="#ac19bf" />
+                        <Stop color="#ac19bf" offset="0.007653061224489797" />
+                        <Stop color="WHITE" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </unFocusColor>
+            </JFXPasswordField>
+            <JFXTextField fx:id="hostTextField" focusColor="DODGERBLUE" labelFloat="true" promptText="Värdadress" GridPane.rowIndex="2">
                <unFocusColor>
                   <LinearGradient endX="1.0" endY="1.0" startX="0.3942307692307692" startY="0.4230769230769231">
                      <stops>
@@ -39,17 +50,7 @@
                   </LinearGradient>
                </unFocusColor>
             </JFXTextField>
-            <JFXTextField focusColor="DODGERBLUE" labelFloat="true" promptText="Värdadress" GridPane.rowIndex="2">
-               <unFocusColor>
-                  <LinearGradient endX="1.0" endY="1.0" startX="0.3942307692307692" startY="0.4230769230769231">
-                     <stops>
-                        <Stop color="#ac19bfa4" />
-                        <Stop color="#ffffff00" offset="1.0" />
-                     </stops>
-                  </LinearGradient>
-               </unFocusColor>
-            </JFXTextField>
-            <JFXTextField focusColor="DODGERBLUE" labelFloat="true" promptText="Port" GridPane.rowIndex="3">
+            <JFXTextField fx:id="portTextField" focusColor="DODGERBLUE" labelFloat="true" promptText="Port" GridPane.rowIndex="3">
                <unFocusColor>
                   <LinearGradient endX="1.0" endY="1.0" startX="0.3942307692307692" startY="0.4230769230769231">
                      <stops>
