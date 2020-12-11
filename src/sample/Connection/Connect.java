@@ -105,6 +105,19 @@ public class Connect {
                 && storeSimpleObjectProperty().get().isConnected());
     }
 
+    public void disconnect() {
+        if (isConnected()) {
+            try {
+                storeSimpleObjectProperty().get().close();
+                imapFolderSimpleObjectProperty().get().close();
+            } catch (MessagingException e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Already disconnected");
+        }
+    }
+
     MessageCountAdapter listenForMessageMessageCountAdapter = new MessageCountAdapter() {
         @Override
         public void messagesAdded(MessageCountEvent e) {

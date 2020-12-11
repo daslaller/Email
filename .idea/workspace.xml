@@ -19,12 +19,30 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Fixed fetch">
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Big update.">
+      <change afterPath="$PROJECT_DIR$/Settings.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Email/sample/Connection/Connect$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email/sample/Connection/Connect$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Email/sample/Connection/Connect$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email/sample/Connection/Connect$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Email/sample/Connection/Connect$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email/sample/Connection/Connect$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Email/sample/Connection/Connect$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email/sample/Connection/Connect$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Email/sample/Connection/Connect.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email/sample/Connection/Connect.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Email/sample/Connection/ConnectionSettings.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email/sample/Connection/ConnectionSettings.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Email/sample/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email/sample/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Email/sample/SettingsFXML/Settings.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email/sample/SettingsFXML/Settings.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Email/sample/SettingsFXML/SettingsController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email/sample/SettingsFXML/SettingsController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Email/sample/SettingsFXML/SettingsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email/sample/SettingsFXML/SettingsController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Email/sample/epostTab/EpostController$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email/sample/epostTab/EpostController$1$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Email/sample/epostTab/EpostController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email/sample/epostTab/EpostController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Email/sample/epostTab/EpostController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email/sample/epostTab/EpostController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Email/sample/epostTab/epostCell.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email/sample/epostTab/epostCell.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sample/Connection/Connect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Connection/Connect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Connection/ConnectionSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Connection/ConnectionSettings.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sample/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/SettingsFXML/Settings.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/SettingsFXML/Settings.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sample/SettingsFXML/SettingsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/SettingsFXML/SettingsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/epostTab/EpostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/epostTab/EpostController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/epostTab/epostCell.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/epostTab/epostCell.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,12 +148,12 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="dynamic.classpath" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/sample/epostTab" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../ProgramData/Microsoft/Windows/Start Menu/Programs/Gluon/SceneBuilder.lnk" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.27914894" />
     <property name="recentsLimit" value="5" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="preferences.JavaFX" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -326,7 +344,14 @@
       <option name="project" value="LOCAL" />
       <updated>1607182893031</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Big update from broken visual studio code.">
+      <created>1607412121639</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1607412121639</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -356,54 +381,10 @@
     <MESSAGE value="jakarta.mail-2.0.0.jar conversion, doesnt work when get message is called." />
     <MESSAGE value="adadw" />
     <MESSAGE value="Fixed fetch" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed fetch" />
+    <MESSAGE value="Big update from broken visual studio code." />
+    <MESSAGE value="Big update." />
+    <option name="LAST_COMMIT_MESSAGE" value="Big update." />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="1055" y="573" width="1121" height="717" key="#Plugins" timestamp="1607411633003">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="1055" y="573" width="1121" height="717" key="#Plugins/0.0.2560.1400@0.0.2560.1400" timestamp="1607411633003" />
-    <state x="942" y="507" key="#Project_Structure" timestamp="1607182813165">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="942" y="507" key="#Project_Structure/0.0.2560.1400@0.0.2560.1400" timestamp="1607182813165" />
-    <state x="1143" y="668" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1607410820386">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="1143" y="668" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1607410820386" />
-    <state x="435" y="123" key="DiffContextDialog" timestamp="1607411839415">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="435" y="123" key="DiffContextDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1607411839415" />
-    <state width="1493" height="260" key="GridCell.Tab.0.bottom" timestamp="1607184343025">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state width="1493" height="260" key="GridCell.Tab.0.bottom/0.0.2560.1400@0.0.2560.1400" timestamp="1607184343025" />
-    <state width="1493" height="260" key="GridCell.Tab.0.center" timestamp="1607184343025">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state width="1493" height="260" key="GridCell.Tab.0.center/0.0.2560.1400@0.0.2560.1400" timestamp="1607184343025" />
-    <state width="1493" height="260" key="GridCell.Tab.0.left" timestamp="1607184343025">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state width="1493" height="260" key="GridCell.Tab.0.left/0.0.2560.1400@0.0.2560.1400" timestamp="1607184343025" />
-    <state width="1493" height="260" key="GridCell.Tab.0.right" timestamp="1607184343025">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state width="1493" height="260" key="GridCell.Tab.0.right/0.0.2560.1400@0.0.2560.1400" timestamp="1607184343025" />
-    <state x="964" y="577" key="SettingsEditor" timestamp="1607411604973">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="964" y="577" key="SettingsEditor/0.0.2560.1400@0.0.2560.1400" timestamp="1607411604973" />
-    <state x="1054" y="661" key="Vcs.Push.Dialog.v2" timestamp="1607183010234">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="1054" y="661" key="Vcs.Push.Dialog.v2/0.0.2560.1400@0.0.2560.1400" timestamp="1607183010234" />
-    <state x="1280" y="842" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1607411121327">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="1280" y="842" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.2560.1400@0.0.2560.1400" timestamp="1607411121327" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

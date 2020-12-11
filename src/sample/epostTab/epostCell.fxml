@@ -1,29 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import javafx.scene.control.Label?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.web.WebView?>
 <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.epostTab.EpostController">
-   <right>
-      <WebView fx:id="emailWebView" prefHeight="-1.0" prefWidth="-1.0" BorderPane.alignment="CENTER" />
-   </right>
-   <center>
-      <ListView fx:id="emailList" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER" />
-   </center>
    <bottom>
       <TitledPane animated="false" text="Utils" BorderPane.alignment="CENTER">
          <content>
             <ToolBar>
                <items>
-                  <JFXButton alignment="CENTER" ripplerFill="BLUE" style="-fx-background-color: white;" text="Print selected" />
-                  <Label fx:id="statusLabel" text="Label" />
+                  <JFXButton alignment="CENTER" buttonType="RAISED" ripplerFill="DODGERBLUE" style="-fx-background-color: white;" text="Print selected" />
+                  <JFXTextField promptText="Search">
+                     <padding>
+                        <Insets left="35.0" />
+                     </padding>
+                     <focusColor>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop color="DODGERBLUE" />
+                              <Stop color="PURPLE" offset="0.9987244897959184" />
+                              <Stop color="PURPLE" offset="1.0" />
+                           </stops>
+                        </LinearGradient>
+                     </focusColor>
+                     <unFocusColor>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop color="PURPLE" />
+                              <Stop color="DODGERBLUE" offset="0.9974489795918369" />
+                              <Stop color="DODGERBLUE" offset="1.0" />
+                           </stops>
+                        </LinearGradient>
+                     </unFocusColor>
+                  </JFXTextField>
                </items>
             </ToolBar>
          </content>
       </TitledPane>
    </bottom>
+   <center>
+      <SplitPane dividerPositions="0.5" BorderPane.alignment="CENTER">
+         <items>
+            <ListView fx:id="emailList" />
+            <StackPane>
+               <children>
+                  <WebView fx:id="emailWebView" minHeight="-1.0" minWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" />
+               </children>
+               <padding>
+                  <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+               </padding>
+            </StackPane>
+         </items>
+      </SplitPane>
+   </center>
 </BorderPane>

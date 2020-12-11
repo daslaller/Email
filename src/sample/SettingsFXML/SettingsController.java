@@ -234,16 +234,16 @@ public class SettingsController {
 
     }
 
-    public void setConnection(Connect connect) {
-        connectSimpleObjectProperty().set(connect);
-    }
-
-    public SimpleObjectProperty<Connect> connectSimpleObjectProperty() {
-        if (connectSimpleObjectProperty == null) {
-            connectSimpleObjectProperty = new SimpleObjectProperty<>();
-        }
-        return connectSimpleObjectProperty;
-    }
+//    public void setConnection(Connect connect) {
+//        connectSimpleObjectProperty().set(connect);
+//    }
+//
+//    public SimpleObjectProperty<Connect> connectSimpleObjectProperty() {
+//        if (connectSimpleObjectProperty == null) {
+//            connectSimpleObjectProperty = new SimpleObjectProperty<>();
+//        }
+//        return connectSimpleObjectProperty;
+//    }
 
     private Node createCell(String title, String description, PrintObjects.PosImg image) {
         Pair<Node, ListCellController> nodeListCellControllerPair = Objects.requireNonNull(Main.getListCellFXML());

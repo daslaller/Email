@@ -5,12 +5,18 @@ public class ConnectionSettings {
     public final String passwd;
     public int port;
     public final String host;
+    public int retries = 3;
 
     public ConnectionSettings(String mail, String passwd, int port, String host) {
         this.mail = mail;
         this.passwd = passwd;
         this.port = port;
         this.host = host;
+    }
+
+    public ConnectionSettings(String mail, String passwd, int port, String host, int retries) {
+        this(mail, passwd, port, host);
+        this.retries = retries;
     }
 
     public String getMail() {

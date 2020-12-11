@@ -4,8 +4,6 @@ import com.company.JFXOptionPane;
 import com.company.Resource;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonIOException;
-
 import javafx.application.Application;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXMLLoader;
@@ -33,7 +31,7 @@ import java.util.logging.Logger;
 public class Main extends Application {
     public static Pair<Node, RootController> squibMain;
     // public static ConnectionSettings currentConnectionSettings;
-    public static Connect currentConnection;
+//    public static Connect currentConnection;
     public static Pair<Node, EpostController> epostCellFXML;
     public static Pair<Node, SettingsController> settingsFXML;
     public static DateTimeFormatter PROJECT_DATE_FORMAT;
@@ -46,6 +44,7 @@ public class Main extends Application {
     public static Gson gson = new GsonBuilder().create();
 
     private static SimpleObjectProperty<ConnectionSettings> CURRENT_CONNECTION_SETTINGS;
+    private static SimpleObjectProperty<Connect> CURRENT_CONNECTION;
 
     @Override
     public void start(Stage primaryStage) {
@@ -53,7 +52,7 @@ public class Main extends Application {
         squibMain = getMAIN();
         Parent root = (Parent) squibMain.getKey();
         primaryStage.setTitle("EmailPos80");
-        primaryStage.setScene(new Scene(root, 1024, 768));
+        primaryStage.setScene(new Scene(root, 1280, 1024));
         primaryStage.show();
         primaryStage.setOnCloseRequest(windowEvent -> {
             try {
@@ -71,29 +70,17 @@ public class Main extends Application {
             currentConnectionSettingsSimpleObjectProperty()
                     .set(gson.fromJson(new FileReader("Settings.json"), ConnectionSettings.class));
         } catch (FileNotFoundException e) {
-
             e.printStackTrace();
-            Pair<String, String> userPasswordPair = JFXOptionPane.showLoginDialog("Settings couldnt be found!",
-                    "You need to create a settings file!", "");
-
-            String host = JFXOptionPane.showInputDialog("Please provide host", "Host needed!", "Specify host here");
-            String portString = JFXOptionPane.showInputDialog("Please provide port", "No port found",
-                    "Leave empty for default port 993");
-
-            int port = ((portString == null || portString.isEmpty()) ? 993 : Integer.parseInt(portString));
-
-            currentConnectionSettingsSimpleObjectProperty()
-                    .set(new ConnectionSettings(userPasswordPair.getKey(), userPasswordPair.getValue(), port, host));
-
+            currentConnectionSettingsSimpleObjectProperty().set(showConnectionSettingsDialog());
             Logger.getGlobal().log(Level.INFO,
                     "User has input settings: " + currentConnectionSettingsSimpleObjectProperty().get());
+
+
         }
 
-        currentConnection = new Connect(currentConnectionSettingsSimpleObjectProperty().get());
-        currentConnection.initiateConnection(3);
-
-        epostCellFXML.getValue().setConnection(currentConnection);
-        settingsFXML.getValue().setConnection(currentConnection);
+        currentConnectionSimpleObjectProperty().set(new Connect(currentConnectionSettingsSimpleObjectProperty().get()));
+//        epostCellFXML.getValue().setConnection(currentConnection);
+//        settingsFXML.getValue().setConnection(currentConnection);
     }
 
     public static void main(String[] args) {
@@ -154,6 +141,19 @@ public class Main extends Application {
         return null;
     }
 
+    public static ConnectionSettings showConnectionSettingsDialog() {
+        Pair<String, String> userPasswordPair = JFXOptionPane.showLoginDialog("Settings couldnt be found!",
+                "You need to create a settings file!", "");
+
+        String host = JFXOptionPane.showInputDialog("Please provide host", "Host needed!", "Specify host here");
+        String portString = JFXOptionPane.showInputDialog("Please provide port", "No port found",
+                "Leave empty for default port 993");
+
+        int port = ((portString == null || portString.isEmpty()) ? 993 : Integer.parseInt(portString));
+
+        return new ConnectionSettings(userPasswordPair.getKey(), userPasswordPair.getValue(), port, host);
+    }
+
     public static SimpleObjectProperty<ConnectionSettings> currentConnectionSettingsSimpleObjectProperty() {
 
         if (CURRENT_CONNECTION_SETTINGS == null) {
@@ -182,5 +182,26 @@ public class Main extends Application {
             });
         }
         return CURRENT_CONNECTION_SETTINGS;
+    }
+
+
+    public static SimpleObjectProperty<Connect> currentConnectionSimpleObjectProperty() {
+        if (CURRENT_CONNECTION == null) {
+            CURRENT_CONNECTION = new SimpleObjectProperty<>();
+            CURRENT_CONNECTION.addListener((observableValue, oldConnect, t1) -> {
+                if (t1 != null && !t1.isConnected()) {
+
+                    t1.initiateConnection(3);
+                    if (!t1.isConnected()) {
+                        JFXOptionPane.showMessageDialog("Couldnt connect with these settings." +
+                                "\nGo to settings pane and change login information!");
+                    }
+                }
+                if (oldConnect != null && oldConnect.isConnected()) {
+                    oldConnect.disconnect();
+                }
+            });
+        }
+        return CURRENT_CONNECTION;
     }
 }
