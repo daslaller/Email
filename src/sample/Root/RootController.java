@@ -1,4 +1,4 @@
-package sample;
+package sample.Root;
 
 import com.jfoenix.controls.JFXListView;
 import escpos.EscPos;
@@ -13,6 +13,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.web.WebView;
 import javafx.util.Pair;
 import output.PrinterOutputStream;
+import sample.PrintObjects;
 import sample.SettingsFXML.SettingsController;
 import sample.epostTab.EpostController;
 
@@ -197,6 +198,10 @@ public class RootController {
 
         public OutputStream hijackStream() {
             return escPos.getOutputStream();
+        }
+
+        public void changePrinterOutputStream(PrinterOutputStream printerOutputStream) {
+            escPos = new EscPos(printerOutputStream);
         }
     }
 }

@@ -18,18 +18,15 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.StackPane;
 import sample.PrintObjects;
-import sample.RootController;
+import sample.Root.RootController;
 
 import java.io.IOException;
 import java.util.concurrent.Callable;
 
 public class ListCellController {
-    public Callable defaultOnDeleteAction = new Callable() {
-        @Override
-        public Object call() {
-            root().setVisible(false);
-            return null;
-        }
+    public Callable defaultOnDeleteAction = () -> {
+        root().setVisible(false);
+        return null;
     };
     public ObservableList<RootController.PRINTEROPTIONS> printAbles = FXCollections.observableArrayList();
     public RootController.PRINTEROPTIONS printText = RootController.PRINTEROPTIONS.TEXT;
@@ -104,13 +101,16 @@ public class ListCellController {
 
 
     public void print() {
-        for (RootController.PRINTEROPTIONS printAble : printAbles) {
-            try {
-                printAble.print();
-            } catch (IOException e) {
-                e.printStackTrace();
+        if(printAbles != null && !printAbles.isEmpty()){
+            for (RootController.PRINTEROPTIONS printAble : printAbles) {
+                try {
+                    printAble.print();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
+
     }
 
     public void setExitAction(Callable exitAction) {

@@ -15,6 +15,7 @@ import javafx.util.Pair;
 import sample.Connection.Connect;
 import sample.Connection.ConnectionSettings;
 import sample.ListCellFXML.ListCellController;
+import sample.Root.RootController;
 import sample.SettingsFXML.SettingsController;
 import sample.epostTab.EpostController;
 
@@ -29,7 +30,7 @@ import java.util.logging.Logger;
 
 @SuppressWarnings("WeakerAccess")
 public class Main extends Application {
-    public static Pair<Node, RootController> squibMain;
+    public static Pair<Node, RootController> epostFXML;
     // public static ConnectionSettings currentConnectionSettings;
 //    public static Connect currentConnection;
     public static Pair<Node, EpostController> epostCellFXML;
@@ -49,22 +50,13 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-        squibMain = getMAIN();
-        Parent root = (Parent) squibMain.getKey();
+        epostFXML = getMAIN();
+        Parent root = (Parent) epostFXML.getKey();
         primaryStage.setTitle("EmailPos80");
         primaryStage.setScene(new Scene(root, 1280, 1024));
         primaryStage.show();
         primaryStage.setOnCloseRequest(windowEvent -> {
-            try {
-                // Force full write to settings.json on exit, even if file contents are equal -
-                // just to be sure
-                gson.toJson(currentConnectionSettingsSimpleObjectProperty().get(),
-                        new FileWriter("settings.json", true));
-                System.out
-                        .println("Wrote new settings file!\n" + currentConnectionSettingsSimpleObjectProperty().get());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            onExit();
         });
         try {
             currentConnectionSettingsSimpleObjectProperty()
@@ -83,6 +75,18 @@ public class Main extends Application {
 //        settingsFXML.getValue().setConnection(currentConnection);
     }
 
+    private void onExit() {
+        try {
+            gson.toJson(currentConnectionSettingsSimpleObjectProperty().get(),
+                    new FileWriter("settings.json", true));
+            System.out
+                    .println("Wrote new settings file!\n" + currentConnectionSettingsSimpleObjectProperty().get());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     public static void main(String[] args) {
         launch(args);
     }
@@ -96,7 +100,7 @@ public class Main extends Application {
 
             controller.setSettingsTab(Objects.requireNonNull((settingsFXML = getSettingsFXML())));
             controller.setEpostTab(Objects.requireNonNull((epostCellFXML = getEpostCellFXML())));
-            return (squibMain = new Pair<>(load, controller));
+            return (epostFXML = new Pair<>(load, controller));
         } catch (IOException e) {
             e.printStackTrace();
         }

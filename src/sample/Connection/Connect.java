@@ -253,6 +253,7 @@ public class Connect {
 
                         newValue.open(IMAPFolder.READ_ONLY);
                         newValue.addMessageCountListener(listenForMessageMessageCountAdapter);
+                        newValue.addConnectionListener(resetConnectionAdapter);
                         Logger.getGlobal().log(Level.FINE, "Added message count adapter as listener");
                         Logger.getGlobal().log(Level.FINE, "Opening imap folder: " + newValue);
 
