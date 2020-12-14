@@ -58,7 +58,7 @@
       <SplitPane dividerPositions="0.5" BorderPane.alignment="CENTER">
          <items>
             <ListView fx:id="emailList" />
-            <WebView fx:id="emailWebView" fontScale="0.7" minHeight="-1.0" minWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" />
+            <WebView fx:id="emailWebView" minHeight="-1.0" minWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" />
          </items>
       </SplitPane>
    </center>

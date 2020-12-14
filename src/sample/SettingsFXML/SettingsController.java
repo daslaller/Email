@@ -25,7 +25,7 @@ import sample.Connection.ConnectionSettings;
 import sample.ListCellFXML.ListCellController;
 import sample.Main;
 import sample.PrintObjects;
-import sample.Root.RootController;
+import sample.RootFXML.RootController;
 
 import javax.imageio.ImageIO;
 import javax.print.DocFlavor;
@@ -249,7 +249,6 @@ public class SettingsController {
             passwordPasswordField.setText(newValue.passwd);
             portTextField.setText(newValue.port + "");
             hostTextField.setText(newValue.host);
-            JFXOptionPane.showMessageDialog("New main settings: " + newValue);
         });
 
 
@@ -270,7 +269,6 @@ public class SettingsController {
 
     private Pair<Region, ListCellController> createCell(String title, String description, PrintObjects.PosImg image) {
         Pair<Node, ListCellController> nodeListCellControllerPair = Objects.requireNonNull(Main.getListCellFXML());
-//        Region load = (Region) nodeListCellControllerPair.getKey();
         Pair<Region, ListCellController> regionListCellControllerPair = new Pair<>((Region) nodeListCellControllerPair.getKey(), nodeListCellControllerPair.getValue());
         ListCellController controller = regionListCellControllerPair.getValue();
 
@@ -283,11 +281,13 @@ public class SettingsController {
         if (image != null) {
             controller.setImage(image);
         }
+
         controller.setExitAction(() -> {
             System.out.println("Exit pressed for node " + controller.toString());
             initiatedListCellsPairSimpleObjectProperty().get().remove(regionListCellControllerPair);
             return createdCellList.remove(nodeListCellControllerPair.getKey());
         });
+
         initiatedListCellsPairSimpleObjectProperty().get().add(regionListCellControllerPair);
         return regionListCellControllerPair;
     }

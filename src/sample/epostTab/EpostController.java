@@ -4,11 +4,13 @@ import com.jfoenix.controls.JFXButton;
 import escpos.EscPos;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
 import javafx.util.Pair;
@@ -17,8 +19,11 @@ import sample.Connection.Connect;
 import sample.ListCellFXML.ListCellController;
 import sample.Main;
 
+import javax.imageio.ImageIO;
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -79,8 +84,11 @@ public class EpostController {
 
         ObservableList<Pair<Region, ListCellController>> pairs = Main.settingsFXML.getValue().initiatedListCellsPairSimpleObjectProperty().get();
         try {
+
             EscPos escPos = new EscPos(new PrinterOutputStream(Main.settingsFXML.getValue().getSelectedPrinter()));
-            escPos.write("Hej");
+            escPos.write(emailList.getSelectionModel().getSelectedItem().toString());
+
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -100,10 +108,14 @@ public class EpostController {
         Main.currentConnectionSimpleObjectProperty().addListener((observableValue, connect, t1) -> emailList.itemsProperty().bind(t1.messagesObservableListSimpleObjectProperty()));
         emailList.selectionModelProperty().get().selectedItemProperty().addListener((observableValue, messageMultipleSelectionModel, t1) -> {
             try {
+
                 String content = (String) t1.getContent();
                 System.err.println("Content of selection:\n" + content);
                 emailWebView.getEngine().loadContent(content);
 
+                WritableImage snapshot = emailWebView.snapshot(null, null);
+                BufferedImage bufferedImage = new BufferedImage((int) snapshot.getWidth(), (int) snapshot.getHeight(), BufferedImage.TYPE_INT_ARGB);
+                ImageIO.write(SwingFXUtils.fromFXImage(snapshot, bufferedImage), "png", new File("snapshot.png"));
             } catch (IOException | MessagingException e) {
                 e.printStackTrace();
             }
@@ -118,6 +130,7 @@ public class EpostController {
                     setText(null);
                 } else {
                     try {
+
                         setText("Loading...");
                         Task<String> getSubjectTask = new Task<String>() {
                             @Override
@@ -126,9 +139,9 @@ public class EpostController {
                             }
                         };
                         getSubjectTask.setOnSucceeded(workerStateEvent -> setText(getSubjectTask.getValue()));
-
                         Thread getSubjectTaskThread = new Thread(getSubjectTask);
                         getSubjectTaskThread.setDaemon(true);
+
 
                         if (!Main.currentConnectionSimpleObjectProperty().get().fetchThreadSimpleObjectProperty().get().isRunning()) {
                             getSubjectTaskThread.start();
@@ -137,6 +150,7 @@ public class EpostController {
                                     .setOnSucceeded(workerStateEvent -> getSubjectTaskThread.start());
                             setText("Populating list!");
                         }
+
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

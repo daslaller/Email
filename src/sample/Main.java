@@ -15,7 +15,7 @@ import javafx.util.Pair;
 import sample.Connection.Connect;
 import sample.Connection.ConnectionSettings;
 import sample.ListCellFXML.ListCellController;
-import sample.Root.RootController;
+import sample.RootFXML.RootController;
 import sample.SettingsFXML.SettingsController;
 import sample.epostTab.EpostController;
 
@@ -173,7 +173,6 @@ public class Main extends Application {
                     try (FileWriter fileWriter = new FileWriter("Settings.json")) {
                         fileWriter.write(json);
                         Logger.getGlobal().log(Level.INFO, "Update of settingsfile pushed.");
-                        JFXOptionPane.showMessageDialog("Pushed!");
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

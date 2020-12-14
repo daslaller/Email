@@ -1,4 +1,4 @@
-package sample.Root;
+package sample.RootFXML;
 
 import com.jfoenix.controls.JFXListView;
 import escpos.EscPos;

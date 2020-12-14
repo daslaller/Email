@@ -19,17 +19,17 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Big update.">
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Big update, started working on print. JavaFX ruled out, regressing to ESCpos Coffee">
+      <change afterPath="$PROJECT_DIR$/snapshot.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/sample/Settings.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Email/sample/Connection/Connect$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email/sample/Connection/Connect$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Email/sample/Connection/Connect$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email/sample/Connection/Connect$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Email/sample/Connection/Connect.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email/sample/Connection/Connect.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Email/sample/Connection/ConnectionSettings.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email/sample/Connection/ConnectionSettings.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Email/sample/ListCellFXML/ListCell.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email/sample/ListCellFXML/ListCell.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Email/sample/ListCellFXML/ListCellController$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Email/sample/ListCellFXML/ListCellController.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Email/sample/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email/sample/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Email/sample/RootController$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Email/sample/RootController$PRINTEROPTIONS$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Email/sample/RootController$PRINTEROPTIONS$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Email/sample/RootController$PRINTEROPTIONS.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Email/sample/RootController.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Email/sample/SettingsFXML/Settings.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email/sample/SettingsFXML/Settings.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Email/sample/SettingsFXML/SettingsController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email/sample/SettingsFXML/SettingsController$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Email/sample/SettingsFXML/SettingsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email/sample/SettingsFXML/SettingsController.class" afterDir="false" />
@@ -37,17 +37,14 @@
       <change beforePath="$PROJECT_DIR$/out/production/Email/sample/epostTab/EpostController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email/sample/epostTab/EpostController$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Email/sample/epostTab/EpostController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email/sample/epostTab/EpostController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Email/sample/epostTab/epostCell.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email/sample/epostTab/epostCell.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Email/sample/root.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/Connection/Connect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Connection/Connect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/ListCellFXML/ListCell.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/ListCellFXML/ListCell.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Connection/ConnectionSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Connection/ConnectionSettings.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sample/ListCellFXML/ListCellController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/ListCellFXML/ListCellController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sample/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/RootController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Root/RootController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/SettingsFXML/Settings.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/SettingsFXML/Settings.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Root/RootController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/RootFXML/RootController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Root/root.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/RootFXML/root.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sample/SettingsFXML/SettingsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/SettingsFXML/SettingsController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sample/epostTab/EpostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/epostTab/EpostController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sample/epostTab/epostCell.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/epostTab/epostCell.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/root.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Root/root.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -365,7 +362,13 @@
       <option name="presentableId" value="LOCAL−00017" />
       <updated>1607720270252</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL−00018" summary="Big update, started working on print. JavaFX ruled out, regressing to ESCpos Coffee">
+      <created>1607903843626</created>
+      <option name="number" value="LOCAL−00018" />
+      <option name="presentableId" value="LOCAL−00018" />
+      <updated>1607903843626</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -397,7 +400,8 @@
     <MESSAGE value="Fixed fetch" />
     <MESSAGE value="Big update from broken visual studio code." />
     <MESSAGE value="Big update." />
-    <option name="LAST_COMMIT_MESSAGE" value="Big update." />
+    <MESSAGE value="Big update, started working on print. JavaFX ruled out, regressing to ESCpos Coffee" />
+    <option name="LAST_COMMIT_MESSAGE" value="Big update, started working on print. JavaFX ruled out, regressing to ESCpos Coffee" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">

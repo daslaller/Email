@@ -7,6 +7,7 @@ public class ConnectionSettings {
     public final String host;
     public int retries = 3;
 
+
     public ConnectionSettings(String mail, String passwd, int port, String host) {
         this.mail = mail;
         this.passwd = passwd;

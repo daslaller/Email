@@ -18,7 +18,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.StackPane;
 import sample.PrintObjects;
-import sample.Root.RootController;
+import sample.RootFXML.RootController;
 
 import java.io.IOException;
 import java.util.concurrent.Callable;
