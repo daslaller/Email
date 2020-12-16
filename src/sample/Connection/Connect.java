@@ -168,7 +168,7 @@ public class Connect {
             Callable<SimpleObjectProperty<ObservableList<Message>>> call = () -> {
 
                 SimpleObjectProperty<ObservableList<Message>> newObject = new SimpleObjectProperty<>(
-                        FXCollections.observableArrayList(imapFolderSimpleObjectProperty().get().getMessages()));
+                        /*FXCollections.observableArrayList(imapFolderSimpleObjectProperty().get().getMessages())*/);
 
                 newObject.addListener((observable, oldValue, newValue) -> {
                     if (oldValue != null && Objects.deepEquals(oldValue, newValue)) {

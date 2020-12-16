@@ -169,7 +169,7 @@ public class Main extends Application {
                 if (newValue != null && !Objects.deepEquals(newValue, oldValue)) {
                     // try {
                     String json = gson.toJson(newValue);
-                    JFXOptionPane.showMessageDialog(json);
+//                    JFXOptionPane.showMessageDialog(json);
                     try (FileWriter fileWriter = new FileWriter("Settings.json")) {
                         fileWriter.write(json);
                         Logger.getGlobal().log(Level.INFO, "Update of settingsfile pushed.");
