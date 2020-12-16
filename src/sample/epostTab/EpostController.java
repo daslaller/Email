@@ -4,9 +4,6 @@ import com.company.JFXOptionPane;
 import com.company.Resource;
 import com.jfoenix.controls.JFXButton;
 import escpos.EscPos;
-import escpos.image.EscPosImage;
-import escpos.image.RasterBitImageWrapper;
-import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
@@ -15,13 +12,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.image.WritableImage;
-import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
-import javafx.util.Pair;
 import output.PrinterOutputStream;
-import sample.BitonalEnum;
 import sample.Connection.Connect;
-import sample.ListCellFXML.ListCellController;
 import sample.Main;
 
 import javax.imageio.ImageIO;
@@ -89,43 +82,18 @@ public class EpostController {
 //        job.endJob();
 
 
-        ObservableList<Pair<Region, ListCellController>> pairs = Main.settingsFXML.getValue().initiatedListCellsPairSimpleObjectProperty().get();
-
-        PrintService selectedPrinter = Main.settingsFXML.getValue().getSelectedPrinter();
-        if (selectedPrinter != null) {
-            System.out.println("Printing to selected printer: " + selectedPrinter.getName());
-            Runnable run = () -> {
-                try {
-                    Path load = Resource.load("snapshot.png");
-
-                    if (load.toFile().exists() && load.toFile().isFile()) {
-                        BitonalEnum bitonalEnum = BitonalEnum.BITONAL_DITHER_MATRIX;
-                        EscPosImage image = bitonalEnum.image(ImageIO.read(load.toFile()));
-
-                        PrinterOutputStream printerOutputStream = new PrinterOutputStream(selectedPrinter);
-                        EscPos escPos = new EscPos(printerOutputStream);
-                        escPos.write(emailList.getSelectionModel().getSelectedItem().getContent().toString());
-                        escPos.write(new RasterBitImageWrapper(), image);
-                        escPos.flush();
-                        escPos.close();
-                    }
-
-
-                } catch (IOException | MessagingException e) {
-                    e.printStackTrace();
-                }
-            };
-            Thread startRun = new Thread(run);
-            startRun.setDaemon(true);
-            startRun.start();
-        } else {
-            JFXOptionPane.showMessageDialog("No printer selected?");
-        }
+//        ObservableList<Pair<Region, ListCellController>> pairs = Main.settingsFXML.getValue().initiatedListCellsPairSimpleObjectProperty().get();
 
 
         //        if (job.printPage(pageLayout, emailWebView)) {
 //            job.endJob();
 //        }
+
+        try {
+            printText(emailList.getSelectionModel().getSelectedItem().getContent().toString());
+        } catch (IOException | MessagingException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -187,6 +155,39 @@ public class EpostController {
                 }
             }
         });
+    }
+
+    public void printText(String printAbleText) {
+        PrintService selectedPrinter = Main.settingsFXML.getValue().getSelectedPrinter();
+        if (selectedPrinter != null) {
+            System.out.println("Printing to selected printer: " + selectedPrinter.getName());
+            Runnable run = () -> {
+                try {
+                    Path load = Resource.load("snapshot.png");
+
+                    if (load.toFile().exists() && load.toFile().isFile()) {
+//                        BitonalEnum bitonalEnum = BitonalEnum.BITONAL_DITHER_MATRIX;
+//                        EscPosImage image = bitonalEnum.image(ImageIO.read(load.toFile()));
+
+                        PrinterOutputStream printerOutputStream = new PrinterOutputStream(selectedPrinter);
+                        EscPos escPos = new EscPos(printerOutputStream);
+                        escPos.write(printAbleText);
+//                        escPos.write(new RasterBitImageWrapper(), image);
+                        escPos.flush();
+                        escPos.close();
+                    }
+
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            };
+            Thread startRun = new Thread(run);
+            startRun.setDaemon(true);
+            startRun.start();
+        } else {
+            JFXOptionPane.showMessageDialog("No printer selected?");
+        }
     }
 
     public void setConnection(Connect connect) {

@@ -55,9 +55,13 @@ public class Main extends Application {
         primaryStage.setTitle("EmailPos80");
         primaryStage.setScene(new Scene(root, 1280, 1024));
         primaryStage.show();
-        primaryStage.setOnCloseRequest(windowEvent -> {
-            onExit();
-        });
+        primaryStage.setOnCloseRequest(windowEvent -> toJsonSettings());
+
+        fromJsonSettings();
+        currentConnectionSimpleObjectProperty().set(new Connect(currentConnectionSettingsSimpleObjectProperty().get()));
+    }
+
+    private static void fromJsonSettings() {
         try {
             currentConnectionSettingsSimpleObjectProperty()
                     .set(gson.fromJson(new FileReader("Settings.json"), ConnectionSettings.class));
@@ -69,13 +73,9 @@ public class Main extends Application {
 
 
         }
-
-        currentConnectionSimpleObjectProperty().set(new Connect(currentConnectionSettingsSimpleObjectProperty().get()));
-//        epostCellFXML.getValue().setConnection(currentConnection);
-//        settingsFXML.getValue().setConnection(currentConnection);
     }
 
-    private void onExit() {
+    private static void toJsonSettings() {
         try {
             gson.toJson(currentConnectionSettingsSimpleObjectProperty().get(),
                     new FileWriter("settings.json", true));
@@ -168,19 +168,17 @@ public class Main extends Application {
 
                 if (newValue != null && !Objects.deepEquals(newValue, oldValue)) {
                     // try {
-                    String json = gson.toJson(newValue);
-//                    JFXOptionPane.showMessageDialog(json);
-                    try (FileWriter fileWriter = new FileWriter("Settings.json")) {
-                        fileWriter.write(json);
-                        Logger.getGlobal().log(Level.INFO, "Update of settingsfile pushed.");
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    toJsonSettings();
+//                    String json = gson.toJson(newValue);
+//                    try (FileWriter fileWriter = new FileWriter("Settings.json")) {
+//                        fileWriter.write(json);
+//                        Logger.getGlobal().log(Level.INFO, "Update of settingsfile pushed.");
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
                 } else {
                     Logger.getGlobal().log(Level.INFO, ("No update of settingsfile has been done, they should be equal."
                             + "\nOldvalue: " + oldValue.toString() + "\nNewvalue: " + newValue.toString()));
-                    JFXOptionPane.showMessageDialog(
-                            "Throw setting\nOldvalue: " + oldValue.toString() + "\nNewvalue: " + newValue.toString());
                 }
             });
         }
