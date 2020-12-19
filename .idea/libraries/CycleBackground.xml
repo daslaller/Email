@@ -2,8 +2,19 @@
   <library name="CycleBackground">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/lib/CycleBackground.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/escpos_coffee.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/gson-2.8.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javax.mail.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jfoenix-8.0.10.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/JFXOptionPane.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/JFXOptionPane1.8_jar.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/Resource1_8_jar.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/SystemInformation1_8_jar.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/Utilities1_8_jar1.jar!/" />
     </CLASSES>
-    <JAVADOC />
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/lib/jfoenix-8.0.10-javadoc.jar!/" />
+    </JAVADOC>
     <SOURCES />
   </library>
 </component>

@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="JFXOptionPane1.8_jar">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/lib/JFXOptionPane1.8_jar.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

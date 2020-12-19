@@ -13,16 +13,15 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 import sample.Connection.Connect;
-import sample.Connection.ConnectionSettings;
+import sample.GSON.GsonReader;
 import sample.ListCellFXML.ListCellController;
 import sample.RootFXML.RootController;
 import sample.SettingsFXML.SettingsController;
 import sample.epostTab.EpostController;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.logging.Level;
@@ -32,19 +31,22 @@ import java.util.logging.Logger;
 public class Main extends Application {
     public static Pair<Node, RootController> epostFXML;
     // public static ConnectionSettings currentConnectionSettings;
-//    public static Connect currentConnection;
+    // public static Connect currentConnection;
     public static Pair<Node, EpostController> epostCellFXML;
     public static Pair<Node, SettingsController> settingsFXML;
     public static DateTimeFormatter PROJECT_DATE_FORMAT;
 
+    public static Path settingsPath;
+
     static {
         // Project dateformat, should be used for all date prints.
         PROJECT_DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        settingsPath = Paths.get("JSON", "Settings2.txt");
     }
 
     public static Gson gson = new GsonBuilder().create();
 
-    private static SimpleObjectProperty<ConnectionSettings> CURRENT_CONNECTION_SETTINGS;
+    private static SimpleObjectProperty<Settings> CURRENT_SETTINGS;
     private static SimpleObjectProperty<Connect> CURRENT_CONNECTION;
 
     @Override
@@ -58,32 +60,29 @@ public class Main extends Application {
         primaryStage.setOnCloseRequest(windowEvent -> toJsonSettings());
 
         fromJsonSettings();
-        currentConnectionSimpleObjectProperty().set(new Connect(currentConnectionSettingsSimpleObjectProperty().get()));
+        currentConnectionSimpleObjectProperty().set(new Connect(currentSettingsSimpleObjectProperty().get()));
     }
 
     private static void fromJsonSettings() {
+        Settings settingsFromFile;
+
         try {
-            currentConnectionSettingsSimpleObjectProperty()
-                    .set(gson.fromJson(new FileReader("Settings.json"), ConnectionSettings.class));
-        } catch (FileNotFoundException e) {
+            settingsFromFile = GsonReader.fJson(GsonReader.fromFile(settingsPath), Settings.class);
+        } catch (IOException e) {
             e.printStackTrace();
-            currentConnectionSettingsSimpleObjectProperty().set(showConnectionSettingsDialog());
-            Logger.getGlobal().log(Level.INFO,
-                    "User has input settings: " + currentConnectionSettingsSimpleObjectProperty().get());
-
-
+            settingsFromFile = showConnectionSettingsDialog();
         }
+        // JFXOptionPane.showMessageDialog("Read: " + settingsFromFile);
+        Logger.getGlobal().info("Read: " + settingsFromFile);
+        currentSettingsSimpleObjectProperty().set(settingsFromFile);
     }
 
     private static void toJsonSettings() {
-        try {
-            gson.toJson(currentConnectionSettingsSimpleObjectProperty().get(),
-                    new FileWriter("settings.json", true));
-            System.out
-                    .println("Wrote new settings file!\n" + currentConnectionSettingsSimpleObjectProperty().get());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        String settingJsonString = GsonReader.tJson(currentSettingsSimpleObjectProperty().get());
+        boolean fileWriteSuccess = GsonReader.toFile(settingsPath, settingJsonString);
+        // JFXOptionPane.showMessageDialog("File written successfully? " +
+        // fileWriteSuccess);
+        Logger.getGlobal().info("File written successfully = " + fileWriteSuccess);
 
     }
 
@@ -145,7 +144,7 @@ public class Main extends Application {
         return null;
     }
 
-    public static ConnectionSettings showConnectionSettingsDialog() {
+    public static Settings showConnectionSettingsDialog() {
         Pair<String, String> userPasswordPair = JFXOptionPane.showLoginDialog("Settings couldnt be found!",
                 "You need to create a settings file!", "");
 
@@ -155,47 +154,39 @@ public class Main extends Application {
 
         int port = ((portString == null || portString.isEmpty()) ? 993 : Integer.parseInt(portString));
 
-        return new ConnectionSettings(userPasswordPair.getKey(), userPasswordPair.getValue(), port, host);
+        return new Settings(userPasswordPair.getKey(), userPasswordPair.getValue(), port, host);
     }
 
-    public static SimpleObjectProperty<ConnectionSettings> currentConnectionSettingsSimpleObjectProperty() {
+    @SuppressWarnings("NonThreadSafeLazyInitialization")
+    public static SimpleObjectProperty<Settings> currentSettingsSimpleObjectProperty() {
 
-        if (CURRENT_CONNECTION_SETTINGS == null) {
+        if (CURRENT_SETTINGS == null) {
 
-            CURRENT_CONNECTION_SETTINGS = new SimpleObjectProperty<>();
-
-            CURRENT_CONNECTION_SETTINGS.addListener((currentValue, oldValue, newValue) -> {
+            CURRENT_SETTINGS = new SimpleObjectProperty<>();
+            CURRENT_SETTINGS.addListener((currentValue, oldValue, newValue) -> {
 
                 if (newValue != null && !Objects.deepEquals(newValue, oldValue)) {
-                    // try {
                     toJsonSettings();
-//                    String json = gson.toJson(newValue);
-//                    try (FileWriter fileWriter = new FileWriter("Settings.json")) {
-//                        fileWriter.write(json);
-//                        Logger.getGlobal().log(Level.INFO, "Update of settingsfile pushed.");
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
                 } else {
                     Logger.getGlobal().log(Level.INFO, ("No update of settingsfile has been done, they should be equal."
                             + "\nOldvalue: " + oldValue.toString() + "\nNewvalue: " + newValue.toString()));
                 }
             });
         }
-        return CURRENT_CONNECTION_SETTINGS;
+        return CURRENT_SETTINGS;
     }
 
-
+    @SuppressWarnings("NonThreadSafeLazyInitialization")
     public static SimpleObjectProperty<Connect> currentConnectionSimpleObjectProperty() {
         if (CURRENT_CONNECTION == null) {
             CURRENT_CONNECTION = new SimpleObjectProperty<>();
             CURRENT_CONNECTION.addListener((observableValue, oldConnect, t1) -> {
-                if (t1 != null && !t1.isConnected()) {
 
+                if (t1 != null && !t1.isConnected()) {
                     t1.initiateConnection(3);
                     if (!t1.isConnected()) {
-                        JFXOptionPane.showMessageDialog("Couldnt connect with these settings." +
-                                "\nGo to settings pane and change login information!");
+                        JFXOptionPane.showMessageDialog("Couldnt connect with these settings."
+                                + "\nGo to settings pane and change login information!");
                     }
                 }
                 if (oldConnect != null && oldConnect.isConnected()) {

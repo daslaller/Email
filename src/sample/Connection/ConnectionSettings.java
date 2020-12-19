@@ -1,12 +1,12 @@
 package sample.Connection;
 
 public class ConnectionSettings {
-    public final String mail;
-    public final String passwd;
-    public int port;
-    public final String host;
-    public int retries = 3;
+    public String mail;
+    public String passwd;
+    public String host;
 
+    public int port;
+    public int retries = 3;
 
     public ConnectionSettings(String mail, String passwd, int port, String host) {
         this.mail = mail;

@@ -6,6 +6,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
+import sample.Settings;
 
 import javax.mail.*;
 import javax.mail.UIDFolder.FetchProfileItem;
@@ -53,10 +54,10 @@ public class Connect {
     }
 
     public Connect(String mail, String passwd, int port, String host) {
-        this(new ConnectionSettings(mail, passwd, port, host));
+        this(new Settings(mail, passwd, port, host));
     }
 
-    public Connect(ConnectionSettings connectionSettings) {
+    public Connect(Settings connectionSettings) {
         this.mail = Objects.requireNonNull(connectionSettings.mail, "Mail cannot be null!");
         this.passwd = Objects.requireNonNull(connectionSettings.passwd, "Password cannot be null!");
         this.host = Objects.requireNonNull(connectionSettings.host, "Host cannot be null!");

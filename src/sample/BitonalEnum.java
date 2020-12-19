@@ -16,7 +16,6 @@ public enum BitonalEnum {
     BITONAL_DARKEN(new BitonalThreshold(50)),
     BITONAL_STRAIGHT(new BitonalThreshold(100)),
     BITONAL_LIGHTEN(new BitonalThreshold(150)),
-
     BITONAL_DITHER(new BitonalOrderedDither()),
     BITONAL_DITHER_DARKEN(new BitonalOrderedDither(2, 2, 20, 130)),
     BITONAL_DITHER_STRAIGHT(new BitonalOrderedDither(2, 2, 120, 170)),
@@ -43,6 +42,7 @@ public enum BitonalEnum {
     }
 
     public EscPosImage image(Image image) {
+        
         BufferedImage bufferedImage = SwingFXUtils.fromFXImage(image, new BufferedImage((int) image.getWidth(), (int) image.getHeight(), BufferedImage.TYPE_INT_ARGB));
         PixelFormat.Type type = image.getPixelReader().getPixelFormat().getType();
         System.out.println("Type: " + type + " ordinal" + type.ordinal() + " complete, " + BufferedImage.TYPE_INT_ARGB + "(ARGB)");

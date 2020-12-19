@@ -21,11 +21,11 @@ import javafx.scene.layout.VBox;
 import javafx.util.Pair;
 import sample.BitonalEnum;
 import sample.Connection.Connect;
-import sample.Connection.ConnectionSettings;
 import sample.ListCellFXML.ListCellController;
 import sample.Main;
 import sample.PrintObjects;
 import sample.RootFXML.RootController;
+import sample.Settings;
 
 import javax.imageio.ImageIO;
 import javax.print.DocFlavor;
@@ -181,11 +181,13 @@ public class SettingsController {
         if (epost != null && !epost.isEmpty() && password != null && !password.isEmpty() && host != null
                 && !host.isEmpty() && !portTextField.getText().isEmpty()) {
 
-            Main.currentConnectionSettingsSimpleObjectProperty()
-                    .set(new ConnectionSettings(epost, password, parseInt, host));
+            Settings settings = new Settings(epost, password, parseInt, host);
+            Main.currentSettingsSimpleObjectProperty()
+                    .set(settings
+                            /*new ConnectionSettings(epost, password, parseInt, host)*/);
 
             JFXOptionPane.showMessageDialog("Restart the program for the change to take effect!\nWrote:\n"
-                    + Main.currentConnectionSettingsSimpleObjectProperty().get() + "\nTo file.");
+                    + Main.currentSettingsSimpleObjectProperty().get() + "\nTo file.");
 
         } else {
             JFXOptionPane.showMessageDialog("All fields are mandatory!");
@@ -244,7 +246,7 @@ public class SettingsController {
         printerCombBox_JFXComboBox.setItems(availablePrintersList);
         printerCombBox_JFXComboBox.getSelectionModel().select(printerDialog());
 
-        Main.currentConnectionSettingsSimpleObjectProperty().addListener((currentValue, oldValue, newValue) -> {
+        Main.currentSettingsSimpleObjectProperty().addListener((currentValue, oldValue, newValue) -> {
             epostTextField.setText(newValue.mail);
             passwordPasswordField.setText(newValue.passwd);
             portTextField.setText(newValue.port + "");
@@ -298,8 +300,10 @@ public class SettingsController {
 
     private PrintService printerDialog() {
         if (!availablePrintersList.isEmpty()) {
-            return JFXOptionPane.showChoiceDialog(availablePrintersList.toArray(new PrintService[0]), "Skrivare",
+            PrintService printService = JFXOptionPane.showChoiceDialog(availablePrintersList.toArray(new PrintService[0]), "Skrivare",
                     "Skrivare", "Använd någon av följande skrivare för utskrift");
+            printService = (printService != null && !printService.getName().isEmpty()) ? printService : PrintServiceLookup.lookupDefaultPrintService();
+            return printService;
         } else {
             System.err.println("No printers found on system!");
             System.exit(-1);
