@@ -91,7 +91,9 @@ public class Main extends Application {
     }
 
     public static Pair<Node, RootController> getMAIN() {
+       
         try {
+
             System.out.println("Root fxml found!");
             FXMLLoader loader = new FXMLLoader(Resource.load("root.fxml").toUri().toURL());
             Node load = loader.load();
@@ -99,7 +101,9 @@ public class Main extends Application {
 
             controller.setSettingsTab(Objects.requireNonNull((settingsFXML = getSettingsFXML())));
             controller.setEpostTab(Objects.requireNonNull((epostCellFXML = getEpostCellFXML())));
+
             return (epostFXML = new Pair<>(load, controller));
+    
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -109,38 +113,52 @@ public class Main extends Application {
 
     @SuppressWarnings("SpellCheckingInspection")
     public static Pair<Node, ListCellController> getListCellFXML() {
+
         try {
+
             FXMLLoader loader = new FXMLLoader(Resource.load("ListCell.fxml").toUri().toURL());
             return new Pair<>(loader.load(), loader.getController());
+
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         System.err.println("Couldn't find List Cell!");
         System.exit(-2);
+
         return null;
     }
 
     public static Pair<Node, SettingsController> getSettingsFXML() {
         try {
+
             FXMLLoader loader = new FXMLLoader(Resource.load("Settings.fxml").toUri().toURL());
             return new Pair<>(loader.load(), loader.getController());
+
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         System.err.println("Couldn't find Settings!");
         System.exit(-2);
+        
         return null;
     }
 
     public static Pair<Node, EpostController> getEpostCellFXML() {
+
         try {
+
             FXMLLoader loader = new FXMLLoader(Resource.load("epostCell.fxml").toUri().toURL());
             return new Pair<>(loader.load(), loader.getController());
+
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         System.err.println("Couldn't find Settings!");
         System.exit(-2);
+
         return null;
     }
 

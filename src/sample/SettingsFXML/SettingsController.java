@@ -20,7 +20,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Pair;
 import sample.BitonalEnum;
-import sample.Connection.Connect;
 import sample.ListCellFXML.ListCellController;
 import sample.Main;
 import sample.PrintObjects;
@@ -45,7 +44,7 @@ public class SettingsController {
     private SimpleObjectProperty<ObservableList<Pair<Region, ListCellController>>> initiatedListCellsPairSimpleObjectProperty;
     private final ObservableList<PrintService> availablePrintersList = FXCollections
             .observableArrayList(Objects.requireNonNull(getAvailablePrinters(), "Cant find any printers"));
-    private SimpleObjectProperty<Connect> connectSimpleObjectProperty;
+    // private SimpleObjectProperty<Connect> connectSimpleObjectProperty;
 
 
     private static final double rollWidthInches = 3.14961; // Inches, 80mm = 3.14961 inc

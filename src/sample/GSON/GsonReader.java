@@ -3,7 +3,6 @@ package sample.GSON;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -40,6 +39,7 @@ public class GsonReader {
         while ((i = fileReader.read()) != -1) {
             stringBuilder.append((char) i);
         }
+        fileReader.close();
         return stringBuilder.toString();
 
     }

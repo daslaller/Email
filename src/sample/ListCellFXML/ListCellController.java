@@ -2,7 +2,6 @@ package sample.ListCellFXML;
 
 //import com.company.CycleBackground;
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXListCell;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.StringProperty;
@@ -24,7 +23,7 @@ import java.io.IOException;
 import java.util.concurrent.Callable;
 
 public class ListCellController {
-    public Callable defaultOnDeleteAction = () -> {
+    public Callable<Object> defaultOnDeleteAction = () -> {
         root().setVisible(false);
         return null;
     };
@@ -33,9 +32,7 @@ public class ListCellController {
     public RootController.PRINTEROPTIONS printImage = RootController.PRINTEROPTIONS.IMAGE;
 
 //
-    @FXML
-    private JFXListCell root_JFXListCell;
-
+ 
     @FXML
     private ImageView nodeImage_ImageView;
 
@@ -113,14 +110,14 @@ public class ListCellController {
 
     }
 
-    public void setExitAction(Callable exitAction) {
+    public <T> void setExitAction(Callable<T> exitAction) {
         deleteButton_JFXButtonActionPerformedProperty().set(exitAction);
     }
 
 
-    private ObjectProperty<Callable> deleteButton_JFXButtonActionPerformedProperty;
+    private  ObjectProperty<Callable<?>> deleteButton_JFXButtonActionPerformedProperty;
 
-    public ObjectProperty<Callable> deleteButton_JFXButtonActionPerformedProperty() {
+    public <T> ObjectProperty<Callable<?>> deleteButton_JFXButtonActionPerformedProperty() {
         if (deleteButton_JFXButtonActionPerformedProperty == null) {
             deleteButton_JFXButtonActionPerformedProperty = new SimpleObjectProperty<>(defaultOnDeleteAction);
         }
