@@ -2,8 +2,6 @@ package sample;
 
 import com.company.JFXOptionPane;
 import com.company.Resource;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import javafx.application.Application;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXMLLoader;
@@ -44,7 +42,7 @@ public class Main extends Application {
         settingsPath = Paths.get("JSON", "Settings2.txt");
     }
 
-    public static Gson gson = new GsonBuilder().create();
+//    public static Gson gson = new GsonBuilder().create();
 
     private static SimpleObjectProperty<Settings> CURRENT_SETTINGS;
     private static SimpleObjectProperty<Connect> CURRENT_CONNECTION;
@@ -78,8 +76,8 @@ public class Main extends Application {
     }
 
     private static void toJsonSettings() {
-        String settingJsonString = GsonReader.tJson(currentSettingsSimpleObjectProperty().get());
-        boolean fileWriteSuccess = GsonReader.toFile(settingsPath, settingJsonString);
+//        String settingJsonString = GsonReader.tJson(currentSettingsSimpleObjectProperty().get());
+        boolean fileWriteSuccess = GsonReader.toFile(settingsPath, GsonReader.tJson(currentSettingsSimpleObjectProperty().get()));
         // JFXOptionPane.showMessageDialog("File written successfully? " +
         // fileWriteSuccess);
         Logger.getGlobal().info("File written successfully = " + fileWriteSuccess);
