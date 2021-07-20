@@ -4,23 +4,38 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.*?>
-<StackPane fx:id="rootStackPane_StackPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ListCellFXML.ListCellController">
-   <children>
-      <ImageView fx:id="nodeImage_ImageView" fitHeight="1.0" fitWidth="1.0" pickOnBounds="true" preserveRatio="true">
-         <StackPane.margin>
-            <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
-         </StackPane.margin></ImageView>
-      <Label fx:id="nodeIdentifierLabel_Label" StackPane.alignment="TOP_CENTER">
-         <StackPane.margin>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+
+
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ListCellFXML.ListCellController">
+   <center>
+      <StackPane fx:id="rootStackPane_StackPane">
+         <children>
+            <ImageView fx:id="nodeImage_ImageView" fitHeight="1.0" fitWidth="1.0" pickOnBounds="true" preserveRatio="true">
+               <StackPane.margin>
+                  <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+               </StackPane.margin>
+            </ImageView>
+            <JFXButton fx:id="deleteButton_JFXButton" buttonType="RAISED" onAction="#deleteButton_JFXButtonActionPerformed" style="-fx-background-color: red;" text="X" textFill="WHITE" StackPane.alignment="TOP_RIGHT" />
+         </children>
+         <padding>
             <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-         </StackPane.margin>
+         </padding>
+      </StackPane>
+   </center>
+   <bottom>
+      <Label fx:id="descriptionLabel_Label" style="-fx-background-color: white;" text="Desription" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+         </padding>
       </Label>
-      <Label fx:id="descriptionLabel_Label" style="-fx-background-color: white;" StackPane.alignment="CENTER">
-         <StackPane.margin>
-            <Insets />
-         </StackPane.margin>
+   </bottom>
+   <top>
+      <Label fx:id="nodeIdentifierLabel_Label" text="Title" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+         </padding>
       </Label>
-      <JFXButton fx:id="deleteButton_JFXButton" buttonType="RAISED" onAction="#deleteButton_JFXButtonActionPerformed" style="-fx-background-color: red;" text="X" textFill="WHITE" StackPane.alignment="TOP_RIGHT" />
-   </children>
-</StackPane>
+   </top>
+</BorderPane>
