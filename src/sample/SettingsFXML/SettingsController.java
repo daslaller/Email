@@ -172,6 +172,7 @@ public class SettingsController {
 
     @FXML
     void saveButton_JFXButtonActionPerformed(ActionEvent event) {
+
         String epost = epostTextField.getText();
         String password = passwordPasswordField.getText();
         int parseInt = Integer.parseInt(portTextField.getText());
@@ -180,7 +181,7 @@ public class SettingsController {
         if (epost != null && !epost.isEmpty() && password != null && !password.isEmpty() && host != null
                 && !host.isEmpty() && !portTextField.getText().isEmpty()) {
 
-            Settings settings = new Settings(epost, password, parseInt, host);
+            Settings settings = new Settings(epost, password, parseInt, host, type -> printerCombBox_JFXComboBox.getSelectionModel().getSelectedItem());
             Main.currentSettingsSimpleObjectProperty()
                     .set(settings
                             /*new ConnectionSettings(epost, password, parseInt, host)*/);
@@ -192,15 +193,17 @@ public class SettingsController {
             JFXOptionPane.showMessageDialog("All fields are mandatory!");
         }
         if (initiatedListCellsPairSimpleObjectProperty() != null && initiatedListCellsPairSimpleObjectProperty().isNotNull().get() && !initiatedListCellsPairSimpleObjectProperty().get().isEmpty()) {
+            Gson gson = new GsonBuilder().create();
             for (Pair<Region, ListCellController> pair : initiatedListCellsPairSimpleObjectProperty().get()) {
-                Gson gson1 = new GsonBuilder().create();
-                String s = gson1.toJson(pair.getValue().printAbles);
+                String s = gson.toJson(pair.getValue().printAbles);
                 JFXOptionPane.showMessageDialog(s);
+//                GsonReader.toFile(Main.savedPath,s);
 
-                Gson gson = new GsonBuilder().create();
-                for (RootController.PRINTEROPTIONS printeroptions : pair.getValue().printAbles) {
-                    String s1 = gson.toJson(printeroptions);
+//                Gson gson = new GsonBuilder().create();
+                for (RootController.PRINTEROPTIONS printerOptions : pair.getValue().printAbles) {
+                    String s1 = gson.toJson(printerOptions);
                     JFXOptionPane.showMessageDialog(s1);
+//                    GsonReader.toFile(Main.savedPath,s);
                 }
             }
 

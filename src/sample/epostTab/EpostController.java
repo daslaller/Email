@@ -1,9 +1,7 @@
 package sample.epostTab;
 
 import com.company.JFXOptionPane;
-import com.company.Resource;
 import com.jfoenix.controls.JFXButton;
-import escpos.EscPos;
 import javafx.concurrent.Task;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
@@ -13,7 +11,6 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.web.WebView;
-import output.PrinterOutputStream;
 import sample.Connection.Connect;
 import sample.Main;
 
@@ -25,7 +22,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Path;
 import java.util.ResourceBundle;
 
 public class EpostController {
@@ -140,12 +136,11 @@ public class EpostController {
                         Thread getSubjectTaskThread = new Thread(getSubjectTask);
                         getSubjectTaskThread.setDaemon(true);
 
-
-                        if (!Main.currentConnectionSimpleObjectProperty().get().fetchThreadSimpleObjectProperty().get().isRunning()) {
+                        Task<Message[]> fetchThread = Main.currentConnectionSimpleObjectProperty().get().fetchThreadSimpleObjectProperty().get();
+                        if (!fetchThread.isRunning()) {
                             getSubjectTaskThread.start();
                         } else {
-                            Main.currentConnectionSimpleObjectProperty().get().fetchThreadSimpleObjectProperty().get()
-                                    .setOnSucceeded(workerStateEvent -> getSubjectTaskThread.start());
+                            fetchThread.setOnSucceeded(workerStateEvent -> getSubjectTaskThread.start());
                             setText("Populating list!");
                         }
 
@@ -162,12 +157,13 @@ public class EpostController {
         if (selectedPrinter != null) {
             System.out.println("Printing to selected printer: " + selectedPrinter.getName());
             Runnable run = () -> {
-                try {
+
+/*                try {
                     Path load = Resource.load("snapshot.png");
 
                     if (load.toFile().exists() && load.toFile().isFile()) {
-//                        BitonalEnum bitonalEnum = BitonalEnum.BITONAL_DITHER_MATRIX;
-//                        EscPosImage image = bitonalEnum.image(ImageIO.read(load.toFile()));
+                       BitonalEnum bitonalEnum = BitonalEnum.BITONAL_DITHER_MATRIX;
+                        EscPosImage image = bitonalEnum.image(ImageIO.read(load.toFile()));
 
                         PrinterOutputStream printerOutputStream = new PrinterOutputStream(selectedPrinter);
                         EscPos escPos = new EscPos(printerOutputStream);
@@ -180,7 +176,7 @@ public class EpostController {
 
                 } catch (IOException e) {
                     e.printStackTrace();
-                }
+                }*/
             };
             Thread startRun = new Thread(run);
             startRun.setDaemon(true);

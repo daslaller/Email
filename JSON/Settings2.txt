@@ -1,1 +1,0 @@
-{"printService":{"printer":"Microsoft Print to PDF","nCopies":0,"prnCaps":0,"gotTrays":false,"gotCopies":false,"mediaInitialized":false,"mpaListInitialized":false,"isInvalid":false},"mail":"inlamning@mobilxperten.se","passwd":"55Nord0055","host":"mailcluster.loopia.se","port":993,"retries":3}

@@ -2,8 +2,6 @@ package sample;
 
 import com.company.JFXOptionPane;
 import com.company.Resource;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import javafx.application.Application;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXMLLoader;
@@ -19,17 +17,20 @@ import sample.RootFXML.RootController;
 import sample.SettingsFXML.SettingsController;
 import sample.epostTab.EpostController;
 
+import javax.print.PrintService;
+import javax.print.PrintServiceLookup;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @SuppressWarnings("WeakerAccess")
 public class Main extends Application {
-    public static Pair<Node, RootController> epostFXML;
+    public static Pair<Node, RootController> mainFXML;
     // public static ConnectionSettings currentConnectionSettings;
     // public static Connect currentConnection;
     public static Pair<Node, EpostController> epostCellFXML;
@@ -37,23 +38,26 @@ public class Main extends Application {
     public static DateTimeFormatter PROJECT_DATE_FORMAT;
 
     public static Path settingsPath;
+    public static Path savedPath;
 
     static {
         // Project dateformat, should be used for all date prints.
         PROJECT_DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-        settingsPath = Paths.get("JSON", "Settings2.txt");
+        settingsPath = Paths.get("JSON", "Settings2.json");
+        savedPath = Paths.get("JSON", "saved.json");
     }
 
-    public static Gson gson = new GsonBuilder().create();
+//    public static Gson gson = new GsonBuilder().create();
 
     private static SimpleObjectProperty<Settings> CURRENT_SETTINGS;
     private static SimpleObjectProperty<Connect> CURRENT_CONNECTION;
 
     @Override
     public void start(Stage primaryStage) {
-
-        epostFXML = getMAIN();
-        Parent root = (Parent) epostFXML.getKey();
+        PrintService printService = PrintServiceLookup.lookupDefaultPrintService();
+        Arrays.stream(printService.getAttributes().toArray()).map(Object::toString).forEach(System.out::println);
+        mainFXML = getMAIN();
+        Parent root = (Parent) mainFXML.getKey();
         primaryStage.setTitle("EmailPos80");
         primaryStage.setScene(new Scene(root, 1280, 1024));
         primaryStage.show();
@@ -72,7 +76,6 @@ public class Main extends Application {
             e.printStackTrace();
             settingsFromFile = showConnectionSettingsDialog();
         }
-        // JFXOptionPane.showMessageDialog("Read: " + settingsFromFile);
         Logger.getGlobal().info("Read: " + settingsFromFile);
         currentSettingsSimpleObjectProperty().set(settingsFromFile);
     }
@@ -80,8 +83,7 @@ public class Main extends Application {
     private static void toJsonSettings() {
         String settingJsonString = GsonReader.tJson(currentSettingsSimpleObjectProperty().get());
         boolean fileWriteSuccess = GsonReader.toFile(settingsPath, settingJsonString);
-        // JFXOptionPane.showMessageDialog("File written successfully? " +
-        // fileWriteSuccess);
+
         Logger.getGlobal().info("File written successfully = " + fileWriteSuccess);
 
     }
@@ -91,7 +93,7 @@ public class Main extends Application {
     }
 
     public static Pair<Node, RootController> getMAIN() {
-       
+
         try {
 
             System.out.println("Root fxml found!");
@@ -102,8 +104,8 @@ public class Main extends Application {
             controller.setSettingsTab(Objects.requireNonNull((settingsFXML = getSettingsFXML())));
             controller.setEpostTab(Objects.requireNonNull((epostCellFXML = getEpostCellFXML())));
 
-            return (epostFXML = new Pair<>(load, controller));
-    
+            return (mainFXML = new Pair<>(load, controller));
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -141,7 +143,7 @@ public class Main extends Application {
 
         System.err.println("Couldn't find Settings!");
         System.exit(-2);
-        
+
         return null;
     }
 

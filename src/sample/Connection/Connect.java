@@ -16,6 +16,7 @@ import javax.mail.event.MessageCountAdapter;
 import javax.mail.event.MessageCountEvent;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Properties;
 import java.util.concurrent.Callable;
@@ -27,6 +28,9 @@ public class Connect {
     String passwd;
     int port;
     String host;
+    private final Authenticator authenticator;
+    private final ArrayList<Runnable> doOnDisconnect = new ArrayList<>(100);
+    private final ArrayList<Runnable> doOnConnect = new ArrayList<>(100);
 
     // boolean isConnectionLive = false;
 
@@ -36,7 +40,7 @@ public class Connect {
     private SimpleObjectProperty<Message[]> lastReceivedMessageSimpleObjectProperty;
     private SimpleObjectProperty<Task<Object>> idleThreadSimpleObjectProperty;
     private SimpleObjectProperty<Task<Message[]>> fetchThreadSimpleObjectProperty;
-    private SimpleObjectProperty<ConnectionSettings> connectionSettingsSimpleObjectProperty;
+//    private SimpleObjectProperty<ConnectionSettings> connectionSettingsSimpleObjectProperty;
 
     public static boolean PARTIAL_FETCH_ENABLED = true;
     public static boolean AUTO_RETRY_ON_CONNECTION_FAILURE = true;
@@ -62,7 +66,12 @@ public class Connect {
         this.passwd = Objects.requireNonNull(connectionSettings.passwd, "Password cannot be null!");
         this.host = Objects.requireNonNull(connectionSettings.host, "Host cannot be null!");
         this.port = Objects.requireNonNull(connectionSettings.port, "Port cannot be null!");
-
+        authenticator = new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(mail, passwd);
+            }
+        };
     }
 
     public void initiateConnection(int retries) {
@@ -73,13 +82,13 @@ public class Connect {
         properties.setProperty("mail.imap.ssl.enable", IS_SSL_ENABLED + "");
         properties.setProperty("mail.imap.partialfetch", PARTIAL_FETCH_ENABLED + "");
 
-        Session session = Session.getInstance(properties);
+        Session session = Session.getInstance(properties, authenticator);
         session.setDebug(true);
 
         for (int i = 0; i < retries; i++) {
             try {
                 Store store = session.getStore();
-                store.connect(mail, passwd);
+                store.connect();
 
                 IMAPFolder folder = (IMAPFolder) store.getFolder("INBOX");
 
@@ -91,6 +100,14 @@ public class Connect {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void doOnDisconnect(Runnable onDisconnect) {
+        doOnDisconnect.add(onDisconnect);
+    }
+
+    public void setDoOnConnect(Runnable onConnect) {
+        doOnConnect.add(onConnect);
     }
 
     public Message getLastMessage() {
@@ -141,26 +158,27 @@ public class Connect {
     ConnectionAdapter resetConnectionAdapter = new ConnectionAdapter() {
         @Override
         public void opened(ConnectionEvent e) {
+            doOnConnect.forEach(Runnable::run);
             super.opened(e);
-
         }
 
         @Override
         public void disconnected(ConnectionEvent e) {
-            super.disconnected(e);
-
+            doOnDisconnect.forEach(Runnable::run);
             if (AUTO_RETRY_ON_CONNECTION_FAILURE) {
                 initiateConnection(1);
             }
+            super.disconnected(e);
         }
 
         @Override
         public void closed(ConnectionEvent e) {
-            super.closed(e);
 
             if (AUTO_RETRY_ON_CONNECTION_FAILURE) {
                 initiateConnection(1);
             }
+            super.closed(e);
+
         }
     };
 
@@ -368,10 +386,10 @@ public class Connect {
         return lastReceivedMessageSimpleObjectProperty;
     }
 
-    public SimpleObjectProperty<ConnectionSettings> connectionSettingsSimpleObjectProperty() {
-        if (connectionSettingsSimpleObjectProperty == null) {
-            connectionSettingsSimpleObjectProperty = new SimpleObjectProperty<>();
-        }
-        return connectionSettingsSimpleObjectProperty;
-    }
+//    public SimpleObjectProperty<ConnectionSettings> connectionSettingsSimpleObjectProperty() {
+//        if (connectionSettingsSimpleObjectProperty == null) {
+//            connectionSettingsSimpleObjectProperty = new SimpleObjectProperty<>();
+//        }
+//        return connectionSettingsSimpleObjectProperty;
+//    }
 }
