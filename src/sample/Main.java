@@ -17,13 +17,10 @@ import sample.RootFXML.RootController;
 import sample.SettingsFXML.SettingsController;
 import sample.epostTab.EpostController;
 
-import javax.print.PrintService;
-import javax.print.PrintServiceLookup;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
 import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -54,8 +51,6 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        PrintService printService = PrintServiceLookup.lookupDefaultPrintService();
-        Arrays.stream(printService.getAttributes().toArray()).map(Object::toString).forEach(System.out::println);
         mainFXML = getMAIN();
         Parent root = (Parent) mainFXML.getKey();
         primaryStage.setTitle("EmailPos80");

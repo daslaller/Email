@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="StarJPOS">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/CommandEmulator.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jcl.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/stario.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jpos113-controls.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/starjavapos.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/xercesimpl.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/xml-apis.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/DiscoveryTool.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

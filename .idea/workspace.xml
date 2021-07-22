@@ -19,28 +19,12 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Big update, started working on print. JavaFX ruled out, regressing to ESCpos Coffee">
-      <change afterPath="$PROJECT_DIR$/JSON/Settings2.json" afterDir="false" />
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Some refinement, dropping support for images, trying to convert to jPOS instead of escpos that doesnt work with mcp31 star printer... (it works but has lf problems)">
+      <change afterPath="$PROJECT_DIR$/lib/starjavapos_StarPRNT_1.13.12_windows_64bit_20190827.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/CycleBackground.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/CycleBackground.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JSON/Settings2.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Email/sample/Connection/Connect$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email/sample/Connection/Connect$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Email/sample/Connection/Connect$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email/sample/Connection/Connect$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Email/sample/Connection/Connect$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email/sample/Connection/Connect$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Email/sample/Connection/Connect$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email/sample/Connection/Connect$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Email/sample/Connection/Connect.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email/sample/Connection/Connect.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Email/sample/Connection/ConnectionSettings.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Email/sample/GSON/GsonReader.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email/sample/GSON/GsonReader.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Email/sample/ListCellFXML/ListCellController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email/sample/ListCellFXML/ListCellController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Email/sample/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email/sample/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Email/sample/Settings.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email/sample/Settings.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Email/sample/SettingsFXML/SettingsController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email/sample/SettingsFXML/SettingsController$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Email/sample/SettingsFXML/SettingsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email/sample/SettingsFXML/SettingsController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/Connection/Connect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Connection/Connect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/Connection/ConnectionSettings.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Email.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Email.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sample/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/Settings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Settings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/SettingsFXML/SettingsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/SettingsFXML/SettingsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/epostTab/EpostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/epostTab/EpostController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -146,8 +130,8 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="dynamic.classpath" value="false" />
-    <property name="last_opened_file_path" value="$USER_HOME$/AppData/Local/SceneBuilder/SceneBuilder.exe" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/starjavapos_StarPRNT_1.13.12_windows_64bit_20190827.zip" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.27914894" />
     <property name="recentsLimit" value="5" />
@@ -370,7 +354,19 @@
       <option name="presentableId" value="LOCAL−00019" />
       <updated>1608104817459</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL−00020" summary="Some refinement, dropping support for images, trying to convert to jPOS instead of escpos that doesnt work with mcp31 star printer... (it works but has lf problems)">
+      <created>1626820337925</created>
+      <option name="number" value="LOCAL−00020" />
+      <option name="presentableId" value="LOCAL−00020" />
+      <updated>1626820337925</updated>
+    </task>
+    <task id="LOCAL−00021" summary="Some refinement, dropping support for images, trying to convert to jPOS instead of escpos that doesnt work with mcp31 star printer... (it works but has lf problems)">
+      <created>1626820385767</created>
+      <option name="number" value="LOCAL−00021" />
+      <option name="presentableId" value="LOCAL−00021" />
+      <updated>1626820385767</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -404,7 +400,8 @@
     <MESSAGE value="Big update." />
     <MESSAGE value="Big update, started working on print. JavaFX ruled out, regressing to ESCpos Coffee" />
     <MESSAGE value="reset faulty. removed poll, please fix!" />
-    <option name="LAST_COMMIT_MESSAGE" value="reset faulty. removed poll, please fix!" />
+    <MESSAGE value="Some refinement, dropping support for images, trying to convert to jPOS instead of escpos that doesnt work with mcp31 star printer... (it works but has lf problems)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Some refinement, dropping support for images, trying to convert to jPOS instead of escpos that doesnt work with mcp31 star printer... (it works but has lf problems)" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
